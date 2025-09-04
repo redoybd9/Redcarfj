@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ই-কমার্স ওয়েবসাইট বিস্তারিত ফর্ম</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f6f8;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        max-width: 800px;
+        margin: 30px auto;
+        background: #fff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+    p {
+        text-align: center;
+        color: #555;
+    }
+    form {
+        margin-top: 20px;
+    }
+    label {
+        display: block;
+        margin: 15px 0 5px;
+        font-weight: bold;
+        color: #333;
+    }
+    input[type="text"], input[type="email"], input[type="number"], textarea, select {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+    textarea {
+        resize: vertical;
+        height: 80px;
+    }
+    .section-title {
+        margin-top: 30px;
+        font-size: 18px;
+        color: #222;
+        border-bottom: 2px solid #eee;
+        padding-bottom: 5px;
+    }
+    button {
+        margin-top: 20px;
+        padding: 15px 25px;
+        border: none;
+        background-color: #4CAF50;
+        color: white;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #45a049;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>ই-কমার্স ওয়েবসাইট বিস্তারিত ফর্ম</h1>
+    <p>আপনার ওয়েবসাইট ডিজাইন ও ডেভেলপ করার জন্য নিচের ফর্মটি বিস্তারিতভাবে পূরণ করুন।</p>
+    
+    <form action="#" method="post">
+        <div class="section-title">১. সাধারণ তথ্য</div>
+        <label for="company">কোম্পানি / ব্র্যান্ডের নাম:</label>
+        <input type="text" id="company" name="company" required>
+
+        <label for="business">ব্যবসার ধরন / নিচ:</label>
+        <input type="text" id="business" name="business">
+
+        <label for="year">প্রতিষ্ঠার বছর (যদি থাকে):</label>
+        <input type="number" id="year" name="year">
+
+        <label for="logo">লোগো / ব্র্যান্ড কালার:</label>
+        <input type="text" id="logo" name="logo">
+
+        <div class="section-title">২. ওয়েবসাইটের উদ্দেশ্য ও লক্ষ্য</div>
+        <label for="objective">ওয়েবসাইটের প্রধান উদ্দেশ্য:</label>
+        <textarea id="objective" name="objective"></textarea>
+
+        <label for="audience">টার্গেট অডিয়েন্স / কাস্টমার গ্রুপ:</label>
+        <textarea id="audience" name="audience"></textarea>
+
+        <div class="section-title">৩. প্রোডাক্ট ও কন্টেন্ট</div>
+        <label for="products">প্রায় কতটি প্রোডাক্ট থাকবে:</label>
+        <input type="number" id="products" name="products">
+
+        <label for="categories">প্রোডাক্ট ক্যাটাগরি / সাব-ক্যাটাগরি:</label>
+        <input type="text" id="categories" name="categories">
+
+        <label for="details">প্রোডাক্টের বিস্তারিত ও ফিচার:</label>
+        <textarea id="details" name="details" placeholder="দাম, রঙ, সাইজ, রিভিউ, স্টক অবস্থা ইত্যাদি।"></textarea>
+
+        <label for="media">প্রয়োজনীয় মিডিয়া ফাইল:</label>
+        <input type="text" id="media" name="media" placeholder="ছবি, ভিডিও, 360° ভিউ ইত্যাদি।">
+
+        <div class="section-title">৪. ডিজাইন ও ইউজার এক্সপিরিয়েন্স (UX/UI)</div>
+        <label for="design">পছন্দের ডিজাইন স্টাইল:</label>
+        <input type="text" id="design" name="design">
+
+        <label for="colors">ব্র্যান্ড কালার / রঙের প্যালেট:</label>
+        <input type="text" id="colors" name="colors">
+
+        <label for="font">ফন্ট ও লোগো প্রেফারেন্স:</label>
+        <input type="text" id="font" name="font">
+
+        <label for="sections">হোমপেজে প্রয়োজনীয় সেকশন:</label>
+        <textarea id="sections" name="sections" placeholder="হিরো সেকশন, ফিচার্ড প্রোডাক্ট, অফার, নিউজলেটার ইত্যাদি।"></textarea>
+
+        <div class="section-title">৫. ফিচার এবং ফাংশনালিটি</div>
+        <label for="features">প্রয়োজনীয় ফিচারসমূহ:</label>
+        <textarea id="features" name="features" placeholder="শপিং কার্ট, পেমেন্ট গেটওয়ে, লগইন, অর্ডার ট্র্যাকিং, SMS/ইমেইল নোটিফিকেশন, মাল্টি-ল্যাঙ্গুয়েজ ইত্যাদি।"></textarea>
+
+        <div class="section-title">৬. প্রযুক্তি ও প্ল্যাটফর্ম পছন্দ</div>
+        <label for="platform">পছন্দের প্ল্যাটফর্ম / প্রযুক্তি:</label>
+        <input type="text" id="platform" name="platform">
+
+        <label for="mobile">মোবাইল রেসপন্সিভ / অ্যাপ ইন্টিগ্রেশন দরকার কি?</label>
+        <input type="text" id="mobile" name="mobile">
+
+        <div class="section-title">৭. রেফারেন্স ও ইনস্পিরেশন</div>
+        <label for="references">অনুপ্রেরণামূলক ওয়েবসাইট / ডিজাইন রেফারেন্স:</label>
+        <textarea id="references" name="references"></textarea>
+
+        <label for="ux">পছন্দের ইউজার এক্সপিরিয়েন্স স্টাইল:</label>
+        <textarea id="ux" name="ux"></textarea>
+
+        <div class="section-title">৮. অন্যান্য তথ্য</div>
+        <label for="domain">ডোমেইন ও হোস্টিং আছে কি?</label>
+        <input type="text" id="domain" name="domain">
+
+        <label for="seo">SEO / সোশ্যাল মিডিয়া ইন্টিগ্রেশন দরকার কি?</label>
+        <input type="text" id="seo" name="seo">
+
+        <label for="other">অন্যান্য বিশেষ ফিচার বা রিকোয়ারমেন্ট:</label>
+        <textarea id="other" name="other"></textarea>
+
+        <button type="submit">ফর্ম জমা দিন</button>
+    </form>
+</div>
+
+</body>
+</html>
