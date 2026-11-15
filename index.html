@@ -381,6 +381,23 @@ const PARTS = [
     "Top part"
 ];
 
+const entry = {
+    id: Date.now(),
+    date: date,
+    color: color,
+    part: part,
+    qty: qty
+};
+
+production.push(entry);
+
+if (!saveData()) {
+    production.pop();
+    return;
+}
+
+showData();
+
 const STORAGE_KEY = "1140_production_system_v5";
 
 const DEFAULT_TARGETS = {
@@ -513,7 +530,16 @@ function getMade(color,part){
         );
 
 }
-
+function getMade(color, part) {
+    return production
+        .filter(item =>
+            item.color === color &&
+            item.part === part
+        )
+        .reduce((total, item) => {
+            return total + Number(item.qty);
+        }, 0);
+}
 // ===============================
 // CHANGE COLOR
 // ===============================
