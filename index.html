@@ -3,156 +3,941 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ই-কমার্স ওয়েবসাইট বিস্তারিত ফর্ম</title>
+<title>1140 Production Management</title>
+
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f6f8;
-        margin: 0;
-        padding: 0;
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f1f5f9;
+    color:#172033;
+}
+
+header{
+    background:linear-gradient(135deg,#172554,#2563eb);
+    color:white;
+    padding:25px 15px;
+    text-align:center;
+}
+
+header h1{
+    margin:0;
+    font-size:25px;
+}
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:15px;
+}
+
+.card{
+    background:white;
+    padding:18px;
+    border-radius:14px;
+    margin-bottom:16px;
+    box-shadow:0 4px 15px rgba(0,0,0,.06);
+}
+
+h2{
+    font-size:19px;
+    margin-top:0;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin-bottom:15px;
+}
+
+.stat{
+    background:#eaf2ff;
+    padding:15px;
+    border-radius:10px;
+}
+
+.stat strong{
+    display:block;
+    font-size:23px;
+    margin-top:8px;
+    color:#1d4ed8;
+}
+
+input,select{
+    width:100%;
+    padding:13px;
+    margin:7px 0 14px;
+    border:1px solid #cbd5e1;
+    border-radius:9px;
+    font-size:15px;
+    background:white;
+}
+
+label{
+    font-weight:bold;
+    font-size:14px;
+}
+
+button{
+    padding:12px 16px;
+    border:0;
+    border-radius:9px;
+    background:#2563eb;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+    margin:3px;
+}
+
+button:active{
+    transform:scale(.97);
+}
+
+.tabs{
+    display:flex;
+    gap:8px;
+    margin-bottom:15px;
+}
+
+.tabs button{
+    flex:1;
+    background:#e2e8f0;
+    color:#172554;
+}
+
+.tabs button.active{
+    background:#172554;
+    color:white;
+}
+
+.tablebox{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    min-width:550px;
+    border-collapse:collapse;
+}
+
+th,td{
+    padding:12px 9px;
+    border-bottom:1px solid #e2e8f0;
+    text-align:center;
+    font-size:13px;
+}
+
+th{
+    background:#172554;
+    color:white;
+}
+
+.delete{
+    background:#dc2626;
+    padding:8px 12px;
+}
+
+.secondary{
+    background:#059669;
+}
+
+#message{
+    color:#059669;
+    font-weight:bold;
+}
+
+@media(max-width:600px){
+    .stats{
+        grid-template-columns:1fr 1fr;
     }
-    .container {
-        max-width: 800px;
-        margin: 30px auto;
-        background: #fff;
-        padding: 30px;
-        border-radius: 10px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+
+    .stat:last-child{
+        grid-column:span 2;
     }
-    h1 {
-        text-align: center;
-        color: #333;
+
+    header h1{
+        font-size:21px;
     }
-    p {
-        text-align: center;
-        color: #555;
-    }
-    form {
-        margin-top: 20px;
-    }
-    label {
-        display: block;
-        margin: 15px 0 5px;
-        font-weight: bold;
-        color: #333;
-    }
-    input[type="text"], input[type="email"], input[type="number"], textarea, select {
-        width: 100%;
-        padding: 10px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-        box-sizing: border-box;
-    }
-    textarea {
-        resize: vertical;
-        height: 80px;
-    }
-    .section-title {
-        margin-top: 30px;
-        font-size: 18px;
-        color: #222;
-        border-bottom: 2px solid #eee;
-        padding-bottom: 5px;
-    }
-    button {
-        margin-top: 20px;
-        padding: 15px 25px;
-        border: none;
-        background-color: #4CAF50;
-        color: white;
-        font-size: 16px;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-    button:hover {
-        background-color: #45a049;
-    }
+}
 </style>
 </head>
+
 <body>
 
+<header>
+    <h1>1140 ARTICLE PRODUCTION</h1>
+    <p>Daily Production Management System</p>
+</header>
+
 <div class="container">
-    <h1>ই-কমার্স ওয়েবসাইট বিস্তারিত ফর্ম</h1>
-    <p>আপনার ওয়েবসাইট ডিজাইন ও ডেভেলপ করার জন্য নিচের ফর্মটি বিস্তারিতভাবে পূরণ করুন।</p>
-    
-    <form action="#" method="post">
-        <div class="section-title">১. সাধারণ তথ্য</div>
-        <label for="company">কোম্পানি / ব্র্যান্ডের নাম:</label>
-        <input type="text" id="company" name="company" required>
 
-        <label for="business">ব্যবসার ধরন / নিচ:</label>
-        <input type="text" id="business" name="business">
+<!-- TOTAL SUMMARY -->
 
-        <label for="year">প্রতিষ্ঠার বছর (যদি থাকে):</label>
-        <input type="number" id="year" name="year">
+<div class="stats">
 
-        <label for="logo">লোগো / ব্র্যান্ড কালার:</label>
-        <input type="text" id="logo" name="logo">
+    <div class="stat">
+        মোট টার্গেট
+        <strong id="totalTarget">0</strong>
+    </div>
 
-        <div class="section-title">২. ওয়েবসাইটের উদ্দেশ্য ও লক্ষ্য</div>
-        <label for="objective">ওয়েবসাইটের প্রধান উদ্দেশ্য:</label>
-        <textarea id="objective" name="objective"></textarea>
+    <div class="stat">
+        মোট উৎপাদন
+        <strong id="totalMade">0</strong>
+    </div>
 
-        <label for="audience">টার্গেট অডিয়েন্স / কাস্টমার গ্রুপ:</label>
-        <textarea id="audience" name="audience"></textarea>
+    <div class="stat">
+        মোট বাকি
+        <strong id="totalPending">0</strong>
+    </div>
 
-        <div class="section-title">৩. প্রোডাক্ট ও কন্টেন্ট</div>
-        <label for="products">প্রায় কতটি প্রোডাক্ট থাকবে:</label>
-        <input type="number" id="products" name="products">
-
-        <label for="categories">প্রোডাক্ট ক্যাটাগরি / সাব-ক্যাটাগরি:</label>
-        <input type="text" id="categories" name="categories">
-
-        <label for="details">প্রোডাক্টের বিস্তারিত ও ফিচার:</label>
-        <textarea id="details" name="details" placeholder="দাম, রঙ, সাইজ, রিভিউ, স্টক অবস্থা ইত্যাদি।"></textarea>
-
-        <label for="media">প্রয়োজনীয় মিডিয়া ফাইল:</label>
-        <input type="text" id="media" name="media" placeholder="ছবি, ভিডিও, 360° ভিউ ইত্যাদি।">
-
-        <div class="section-title">৪. ডিজাইন ও ইউজার এক্সপিরিয়েন্স (UX/UI)</div>
-        <label for="design">পছন্দের ডিজাইন স্টাইল:</label>
-        <input type="text" id="design" name="design">
-
-        <label for="colors">ব্র্যান্ড কালার / রঙের প্যালেট:</label>
-        <input type="text" id="colors" name="colors">
-
-        <label for="font">ফন্ট ও লোগো প্রেফারেন্স:</label>
-        <input type="text" id="font" name="font">
-
-        <label for="sections">হোমপেজে প্রয়োজনীয় সেকশন:</label>
-        <textarea id="sections" name="sections" placeholder="হিরো সেকশন, ফিচার্ড প্রোডাক্ট, অফার, নিউজলেটার ইত্যাদি।"></textarea>
-
-        <div class="section-title">৫. ফিচার এবং ফাংশনালিটি</div>
-        <label for="features">প্রয়োজনীয় ফিচারসমূহ:</label>
-        <textarea id="features" name="features" placeholder="শপিং কার্ট, পেমেন্ট গেটওয়ে, লগইন, অর্ডার ট্র্যাকিং, SMS/ইমেইল নোটিফিকেশন, মাল্টি-ল্যাঙ্গুয়েজ ইত্যাদি।"></textarea>
-
-        <div class="section-title">৬. প্রযুক্তি ও প্ল্যাটফর্ম পছন্দ</div>
-        <label for="platform">পছন্দের প্ল্যাটফর্ম / প্রযুক্তি:</label>
-        <input type="text" id="platform" name="platform">
-
-        <label for="mobile">মোবাইল রেসপন্সিভ / অ্যাপ ইন্টিগ্রেশন দরকার কি?</label>
-        <input type="text" id="mobile" name="mobile">
-
-        <div class="section-title">৭. রেফারেন্স ও ইনস্পিরেশন</div>
-        <label for="references">অনুপ্রেরণামূলক ওয়েবসাইট / ডিজাইন রেফারেন্স:</label>
-        <textarea id="references" name="references"></textarea>
-
-        <label for="ux">পছন্দের ইউজার এক্সপিরিয়েন্স স্টাইল:</label>
-        <textarea id="ux" name="ux"></textarea>
-
-        <div class="section-title">৮. অন্যান্য তথ্য</div>
-        <label for="domain">ডোমেইন ও হোস্টিং আছে কি?</label>
-        <input type="text" id="domain" name="domain">
-
-        <label for="seo">SEO / সোশ্যাল মিডিয়া ইন্টিগ্রেশন দরকার কি?</label>
-        <input type="text" id="seo" name="seo">
-
-        <label for="other">অন্যান্য বিশেষ ফিচার বা রিকোয়ারমেন্ট:</label>
-        <textarea id="other" name="other"></textarea>
-
-        <button type="submit">ফর্ম জমা দিন</button>
-    </form>
 </div>
+
+<!-- COLOR SUMMARY -->
+
+<div class="card">
+
+    <h2>কালার অনুযায়ী উৎপাদন</h2>
+
+    <div class="tabs">
+
+        <button class="active" onclick="changeColor('olive',this)">
+            Olive Colour
+        </button>
+
+        <button onclick="changeColor('tan',this)">
+            Caramel (Tan)
+        </button>
+
+    </div>
+
+    <div class="tablebox">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Part Name</th>
+                    <th>Target</th>
+                    <th>Production</th>
+                    <th>Pending</th>
+                </tr>
+            </thead>
+
+            <tbody id="summary"></tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<!-- ADD PRODUCTION -->
+
+<div class="card">
+
+    <h2>দৈনিক উৎপাদন যোগ করুন</h2>
+
+    <form id="productionForm">
+
+        <label>তারিখ</label>
+        <input type="date" id="date" required>
+
+        <label>কালার</label>
+
+        <select id="color">
+            <option value="olive">Olive Colour</option>
+            <option value="tan">Caramel (Tan) Colour</option>
+        </select>
+
+        <label>পার্ট</label>
+
+        <select id="part">
+            <option>Backpart</option>
+            <option>Front zipar part</option>
+            <option>R</option>
+            <option>L</option>
+            <option>Top part</option>
+        </select>
+
+        <label>উৎপাদনের পরিমাণ</label>
+
+        <input
+            type="number"
+            id="qty"
+            min="1"
+            step="1"
+            placeholder="পরিমাণ লিখুন"
+            required
+        >
+
+        <button type="submit">
+            + উৎপাদন যোগ করুন
+        </button>
+
+        <p id="message"></p>
+
+    </form>
+
+</div>
+
+<!-- TARGET CHANGE -->
+
+<div class="card">
+
+    <h2>টার্গেট পরিবর্তন</h2>
+
+    <label>কালার</label>
+
+    <select id="targetColor">
+        <option value="olive">Olive Colour</option>
+        <option value="tan">Caramel (Tan)</option>
+    </select>
+
+    <label>পার্ট</label>
+
+    <select id="targetPart">
+        <option>Backpart</option>
+        <option>Front zipar part</option>
+        <option>R</option>
+        <option>L</option>
+        <option>Top part</option>
+    </select>
+
+    <label>নতুন টার্গেট</label>
+
+    <input type="number" id="newTarget" min="0">
+
+    <button onclick="saveTarget()">
+        টার্গেট সেভ করুন
+    </button>
+
+</div>
+
+<!-- PRODUCTION HISTORY -->
+
+<div class="card">
+
+    <h2>উৎপাদনের ইতিহাস</h2>
+
+    <button class="secondary" onclick="downloadCSV()">
+        রিপোর্ট ডাউনলোড
+    </button>
+
+    <button class="secondary" onclick="backup()">
+        ব্যাকআপ
+    </button>
+
+    <label style="display:inline-block;background:#059669;color:white;padding:12px;border-radius:9px;cursor:pointer">
+        Restore
+        <input
+            type="file"
+            id="restoreFile"
+            accept=".json"
+            hidden
+            onchange="restoreBackup(event)"
+        >
+    </label>
+
+    <div class="tablebox" style="margin-top:15px">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>তারিখ</th>
+                    <th>কালার</th>
+                    <th>পার্ট</th>
+                    <th>পরিমাণ</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+
+            <tbody id="history"></tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+</div>
+
+<script>
+
+// ===============================
+// 1140 PRODUCTION MANAGEMENT
+// ===============================
+
+const PARTS = [
+    "Backpart",
+    "Front zipar part",
+    "R",
+    "L",
+    "Top part"
+];
+
+const STORAGE_KEY = "1140_production_system_v5";
+
+const DEFAULT_TARGETS = {
+
+    olive: {
+        "Backpart":13635,
+        "Front zipar part":13980,
+        "R":14700,
+        "L":15172,
+        "Top part":15855
+    },
+
+    tan: {
+        "Backpart":21693,
+        "Front zipar part":21185,
+        "R":21590,
+        "L":21130,
+        "Top part":21131
+    }
+
+};
+
+let targets = JSON.parse(JSON.stringify(DEFAULT_TARGETS));
+
+let production = [];
+
+let activeColor = "olive";
+
+// ===============================
+// LOAD DATA
+// ===============================
+
+function loadData(){
+
+    try{
+
+        const saved = localStorage.getItem(STORAGE_KEY);
+
+        if(saved){
+
+            const data = JSON.parse(saved);
+
+            if(Array.isArray(data.production)){
+                production = data.production;
+            }
+
+            if(data.targets){
+
+                ["olive","tan"].forEach(color=>{
+
+                    PARTS.forEach(part=>{
+
+                        const value = Number(data.targets[color]?.[part]);
+
+                        if(Number.isSafeInteger(value) && value>=0){
+                            targets[color][part] = value;
+                        }
+
+                    });
+
+                });
+
+            }
+
+        }
+
+    }catch(error){
+
+        alert("ডাটা লোড করতে সমস্যা হয়েছে!");
+
+    }
+
+}
+
+// ===============================
+// SAVE DATA
+// ===============================
+
+function saveData(){
+
+    try{
+
+        const data = {
+            production:production,
+            targets:targets
+        };
+
+        localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify(data)
+        );
+
+        return true;
+
+    }catch(error){
+
+        alert("ডাটা সেভ হচ্ছে না! ব্রাউজারের স্টোরেজ পরীক্ষা করুন।");
+
+        return false;
+
+    }
+
+}
+
+// ===============================
+// NUMBER FORMAT
+// ===============================
+
+function formatNumber(number){
+
+    return Number(number || 0).toLocaleString("en-US");
+
+}
+
+// ===============================
+// GET PRODUCTION
+// ===============================
+
+function getMade(color,part){
+
+    return production
+
+        .filter(item=>
+            item.color===color &&
+            item.part===part
+        )
+
+        .reduce((sum,item)=>
+            sum + Number(item.qty),0
+        );
+
+}
+
+// ===============================
+// CHANGE COLOR
+// ===============================
+
+function changeColor(color,button){
+
+    activeColor = color;
+
+    document.querySelectorAll(".tabs button")
+        .forEach(btn=>btn.classList.remove("active"));
+
+    button.classList.add("active");
+
+    showData();
+
+}
+
+// ===============================
+// SHOW SUMMARY
+// ===============================
+
+function showData(){
+
+    let html = "";
+
+    let allTarget = 0;
+    let allMade = 0;
+    let allPending = 0;
+
+    PARTS.forEach(part=>{
+
+        const target = targets[activeColor][part];
+
+        const made = getMade(activeColor,part);
+
+        const pending = Math.max(0,target-made);
+
+        html += `
+        <tr>
+            <td>${part}</td>
+            <td>${formatNumber(target)}</td>
+            <td>${formatNumber(made)}</td>
+            <td>${formatNumber(pending)}</td>
+        </tr>
+        `;
+
+    });
+
+    document.getElementById("summary").innerHTML = html;
+
+    ["olive","tan"].forEach(color=>{
+
+        PARTS.forEach(part=>{
+
+            const target = targets[color][part];
+
+            const made = getMade(color,part);
+
+            allTarget += target;
+            allMade += made;
+            allPending += Math.max(0,target-made);
+
+        });
+
+    });
+
+    document.getElementById("totalTarget").innerText =
+        formatNumber(allTarget);
+
+    document.getElementById("totalMade").innerText =
+        formatNumber(allMade);
+
+    document.getElementById("totalPending").innerText =
+        formatNumber(allPending);
+
+    showHistory();
+
+}
+
+// ===============================
+// ADD PRODUCTION
+// ===============================
+
+document.getElementById("productionForm")
+.addEventListener("submit",function(event){
+
+    event.preventDefault();
+
+    const date = document.getElementById("date").value;
+
+    const color = document.getElementById("color").value;
+
+    const part = document.getElementById("part").value;
+
+    const qty = Number(document.getElementById("qty").value);
+
+    if(
+        !date ||
+        !["olive","tan"].includes(color) ||
+        !PARTS.includes(part) ||
+        !Number.isSafeInteger(qty) ||
+        qty<=0
+    ){
+
+        alert("সঠিক তথ্য লিখুন!");
+
+        return;
+
+    }
+
+    const entry = {
+
+        id:Date.now()+Math.floor(Math.random()*100000),
+
+        date:date,
+
+        color:color,
+
+        part:part,
+
+        qty:qty
+
+    };
+
+    production.push(entry);
+
+    if(!saveData()){
+
+        production.pop();
+
+        return;
+
+    }
+
+    document.getElementById("qty").value = "";
+
+    document.getElementById("message").innerText =
+        "✓ উৎপাদন সফলভাবে সেভ হয়েছে!";
+
+    showData();
+
+});
+
+// ===============================
+// SHOW HISTORY
+// ===============================
+
+function showHistory(){
+
+    const sorted = [...production].sort((a,b)=>
+        b.date.localeCompare(a.date)
+    );
+
+    let html = "";
+
+    sorted.forEach(item=>{
+
+        html += `
+        <tr>
+
+            <td>${item.date}</td>
+
+            <td>
+                ${item.color==="olive"?"Olive":"Caramel"}
+            </td>
+
+            <td>${item.part}</td>
+
+            <td>${formatNumber(item.qty)}</td>
+
+            <td>
+                <button
+                    class="delete"
+                    onclick="deleteEntry(${item.id})">
+                    Delete
+                </button>
+            </td>
+
+        </tr>
+        `;
+
+    });
+
+    document.getElementById("history").innerHTML = html;
+
+}
+
+// ===============================
+// DELETE PRODUCTION
+// ===============================
+
+function deleteEntry(id){
+
+    if(!confirm("এই উৎপাদন মুছে ফেলবেন?")){
+        return;
+    }
+
+    const oldProduction = production;
+
+    production = production.filter(
+        item=>item.id!==id
+    );
+
+    if(!saveData()){
+
+        production = oldProduction;
+
+        return;
+
+    }
+
+    showData();
+
+}
+
+// ===============================
+// SAVE TARGET
+// ===============================
+
+function saveTarget(){
+
+    const color = document.getElementById("targetColor").value;
+
+    const part = document.getElementById("targetPart").value;
+
+    const qty = Number(document.getElementById("newTarget").value);
+
+    if(!Number.isSafeInteger(qty) || qty<0){
+
+        alert("সঠিক টার্গেট লিখুন!");
+
+        return;
+
+    }
+
+    const oldTarget = targets[color][part];
+
+    targets[color][part] = qty;
+
+    if(!saveData()){
+
+        targets[color][part] = oldTarget;
+
+        return;
+
+    }
+
+    alert("টার্গেট সফলভাবে সেভ হয়েছে!");
+
+    showData();
+
+}
+
+// ===============================
+// CSV REPORT
+// ===============================
+
+function downloadCSV(){
+
+    let rows = [
+        ["Date","Color","Part","Production"]
+    ];
+
+    production.forEach(item=>{
+
+        rows.push([
+            item.date,
+            item.color,
+            item.part,
+            item.qty
+        ]);
+
+    });
+
+    const csv = "\uFEFF" + rows.map(row=>
+        row.map(value=>
+            '"'+String(value).replace(/"/g,'""')+'"'
+        ).join(",")
+    ).join("\n");
+
+    const blob = new Blob([csv],{
+        type:"text/csv;charset=utf-8"
+    });
+
+    const link = document.createElement("a");
+
+    link.href = URL.createObjectURL(blob);
+
+    link.download = "1140-production-report.csv";
+
+    link.click();
+
+    URL.revokeObjectURL(link.href);
+
+}
+
+// ===============================
+// BACKUP
+// ===============================
+
+function backup(){
+
+    const data = {
+        targets:targets,
+        production:production
+    };
+
+    const blob = new Blob(
+        [JSON.stringify(data,null,2)],
+        {type:"application/json"}
+    );
+
+    const link = document.createElement("a");
+
+    link.href = URL.createObjectURL(blob);
+
+    link.download = "1140-backup.json";
+
+    link.click();
+
+    URL.revokeObjectURL(link.href);
+
+}
+
+// ===============================
+// RESTORE BACKUP
+// ===============================
+
+async function restoreBackup(event){
+
+    const file = event.target.files[0];
+
+    if(!file)return;
+
+    try{
+
+        const saved = JSON.parse(await file.text());
+
+        if(
+            !saved ||
+            !Array.isArray(saved.production) ||
+            !saved.targets
+        ){
+
+            throw new Error("Invalid backup");
+
+        }
+
+        for(const item of saved.production){
+
+            if(
+                !item.date ||
+                !["olive","tan"].includes(item.color) ||
+                !PARTS.includes(item.part) ||
+                !Number.isSafeInteger(Number(item.qty)) ||
+                Number(item.qty)<=0
+            ){
+
+                throw new Error("Invalid entry");
+
+            }
+
+        }
+
+        if(!confirm("বর্তমান ডাটা পরিবর্তন করে ব্যাকআপ Restore করবেন?")){
+            return;
+        }
+
+        const oldProduction = production;
+        const oldTargets = targets;
+
+        production = saved.production;
+
+        targets = JSON.parse(JSON.stringify(DEFAULT_TARGETS));
+
+        ["olive","tan"].forEach(color=>{
+
+            PARTS.forEach(part=>{
+
+                const value = Number(saved.targets[color]?.[part]);
+
+                if(Number.isSafeInteger(value) && value>=0){
+                    targets[color][part] = value;
+                }
+
+            });
+
+        });
+
+        if(!saveData()){
+
+            production = oldProduction;
+            targets = oldTargets;
+
+            return;
+
+        }
+
+        showData();
+
+        alert("ব্যাকআপ সফলভাবে Restore হয়েছে!");
+
+    }catch(error){
+
+        alert("সঠিক JSON ব্যাকআপ ফাইল নির্বাচন করুন!");
+
+    }
+
+    event.target.value = "";
+
+}
+
+// ===============================
+// INITIALIZE
+// ===============================
+
+document.getElementById("date").value =
+    new Date().toLocaleDateString("en-CA");
+
+loadData();
+
+showData();
+
+</script>
 
 </body>
 </html>
