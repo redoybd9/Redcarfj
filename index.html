@@ -3,279 +3,296 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Production Management</title>
+<title>Premium Production Management</title>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,"Noto Sans Bengali",sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&display=swap');
+
+:root{
+ --green:#176b49;
+ --green2:#26966b;
+ --dark:#102d23;
+ --bg:#f3f6f5;
+ --red:#dc3545;
+ --text:#26352e;
+ --muted:#718078;
+ --border:#e7eeea;
 }
+
+*{box-sizing:border-box;font-family:'Hind Siliguri',sans-serif}
 
 body{
-    background:#f3f5f7;
-    color:#202938;
-    padding:15px;
+ margin:0;
+ padding:14px;
+ background:var(--bg);
+ color:var(--text);
 }
 
-.container{
-    max-width:1100px;
-    margin:auto;
-}
+.container{max-width:1100px;margin:auto}
 
 header{
-    background:linear-gradient(135deg,#172d27,#315c4b);
-    color:white;
-    padding:25px;
-    border-radius:18px;
-    margin-bottom:20px;
-    box-shadow:0 5px 20px #0002;
+ background:linear-gradient(125deg,#102d23,#176b49,#26966b);
+ color:white;
+ padding:27px 22px;
+ border-radius:19px;
+ margin-bottom:18px;
+ box-shadow:0 9px 28px #176b4930;
 }
 
-header h1{
-    font-size:25px;
-    margin-bottom:8px;
-}
-
-header p{
-    color:#d5e8dc;
-    font-size:14px;
-}
+header h1{margin:0 0 7px;font-size:25px}
+header p{margin:0;color:#d8f2e4;font-size:14px}
 
 .card{
-    background:white;
-    padding:20px;
-    border-radius:15px;
-    margin-bottom:18px;
-    box-shadow:0 3px 15px #0000000c;
+ background:white;
+ padding:19px;
+ border-radius:16px;
+ margin-bottom:17px;
+ box-shadow:0 5px 22px #193c2b0c;
+ border:1px solid #edf1ef;
 }
 
 h2{
-    font-size:19px;
-    margin-bottom:15px;
-}
-
-.tabs{
-    display:flex;
-    gap:10px;
-    margin-bottom:18px;
-}
-
-.tab{
-    flex:1;
-    border:none;
-    padding:13px;
-    border-radius:10px;
-    background:#e9ecef;
-    font-size:16px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.tab.active{
-    background:#245b43;
-    color:white;
-}
-
-.grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:12px;
-}
-
-.stat{
-    padding:17px;
-    border-radius:12px;
-    background:#f1f7f3;
-    border:1px solid #e0eee5;
-}
-
-.stat small{
-    color:#64748b;
-    display:block;
-    margin-bottom:8px;
-}
-
-.stat h3{
-    font-size:23px;
-    color:#245b43;
-}
-
-input,select{
-    width:100%;
-    padding:13px;
-    border:1px solid #d8dee5;
-    border-radius:9px;
-    font-size:15px;
-    outline:none;
-    background:white;
-}
-
-input:focus,select:focus{
-    border-color:#28744f;
+ margin:0 0 16px;
+ font-size:19px;
+ color:#1b3c2c;
 }
 
 label{
-    display:block;
-    font-size:14px;
-    font-weight:bold;
-    margin-bottom:7px;
+ display:block;
+ font-size:14px;
+ font-weight:600;
+ margin-bottom:7px;
 }
 
-.form-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:15px;
+input,select{
+ width:100%;
+ padding:12px;
+ border:1px solid #dce6df;
+ border-radius:10px;
+ font-size:15px;
+ outline:none;
+ background:#fbfdfb;
 }
 
-.field{
-    margin-bottom:15px;
+input:focus,select:focus{
+ border-color:var(--green2);
+ box-shadow:0 0 0 3px #26966b18;
 }
 
-button{
-    cursor:pointer;
+.field{margin-bottom:13px}
+
+.grid{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:11px;
 }
+
+.stat{
+ background:#eff8f2;
+ border:1px solid #dceee2;
+ padding:16px;
+ border-radius:13px;
+}
+
+.stat small{
+ display:block;
+ color:#698073;
+ margin-bottom:7px;
+}
+
+.stat strong{
+ color:var(--green);
+ font-size:24px;
+}
+
+.setbox{
+ background:linear-gradient(120deg,#e8f7ed,#f4fbf6);
+ border:1px solid #cce8d5;
+ border-radius:14px;
+ padding:18px;
+ margin-bottom:14px;
+}
+
+.setbox small{display:block;color:#527761;margin-bottom:5px}
+.setbox strong{font-size:32px;color:#176b49}
+.setbox .lowest{font-size:14px;color:#b42332;margin-top:7px;font-weight:700}
+
+.formgrid{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:12px;
+}
+
+button{cursor:pointer;transition:.2s}
+button:active{transform:scale(.98)}
 
 .primary{
-    background:#245b43;
-    color:white;
-    border:none;
-    padding:14px;
-    width:100%;
-    border-radius:9px;
-    font-size:16px;
-    font-weight:bold;
-}
-
-.primary:hover{
-    background:#17442f;
-}
-
-.table-wrap{
-    overflow-x:auto;
-}
-
-table{
-    width:100%;
-    border-collapse:collapse;
-    min-width:600px;
-}
-
-th,td{
-    padding:13px 10px;
-    text-align:left;
-    border-bottom:1px solid #edf0f2;
-    font-size:14px;
-}
-
-th{
-    background:#f5f7f8;
-    color:#475569;
-}
-
-.badge{
-    padding:5px 9px;
-    background:#e5f4e9;
-    color:#217044;
-    border-radius:20px;
-    font-size:12px;
-    font-weight:bold;
-}
-
-.delete{
-    background:#fee2e2;
-    color:#b91c1c;
-    border:none;
-    padding:7px 10px;
-    border-radius:7px;
+ background:linear-gradient(120deg,#176b49,#26966b);
+ color:white;
+ border:0;
+ width:100%;
+ padding:14px;
+ border-radius:10px;
+ font-size:16px;
+ font-weight:700;
+ box-shadow:0 5px 13px #176b4925;
 }
 
 .secondary{
-    border:1px solid #245b43;
-    background:white;
-    color:#245b43;
-    padding:10px 14px;
-    border-radius:8px;
-    font-weight:bold;
+ background:#eff8f2;
+ color:#176b49;
+ border:1px solid #cfe5d6;
+ padding:10px 13px;
+ border-radius:9px;
+ font-weight:600;
 }
 
-.actions{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-}
-
-.actions button{
-    flex:1;
-    min-width:130px;
+.danger{
+ background:#fff0f0;
+ color:#c62828;
+ border:0;
+ padding:7px 10px;
+ border-radius:7px;
 }
 
 .part-row{
-    display:grid;
-    grid-template-columns:1fr 1fr 1fr;
-    gap:10px;
-    padding:13px 0;
-    border-bottom:1px solid #eee;
-    align-items:center;
+ padding:17px 0;
+ border-bottom:1px solid var(--border);
 }
 
-.part-row strong{
-    font-size:14px;
+.part-row:last-child{border-bottom:0}
+
+.part-head{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:8px;
+ margin-bottom:12px;
 }
 
-.part-row span{
-    font-size:13px;
-    color:#64748b;
+.part-name{font-size:17px;font-weight:700}
+
+.badge{
+ display:inline-block;
+ background:#eaf5ee;
+ color:#176b49;
+ padding:5px 10px;
+ border-radius:20px;
+ font-size:12px;
+ font-weight:700;
+}
+
+.minimum-badge{
+ background:#ffe7e7;
+ color:#c62828;
+ padding:5px 10px;
+ border-radius:20px;
+ font-size:12px;
+ font-weight:700;
+}
+
+.part-grid{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:8px;
+}
+
+.part-box{
+ background:#f7faf8;
+ padding:11px 8px;
+ border-radius:10px;
+ border:1px solid #edf1ef;
+}
+
+.part-box small{
+ display:block;
+ color:var(--muted);
+ font-size:12px;
+ margin-bottom:5px;
+}
+
+.part-box strong{font-size:16px}
+
+.set-value{
+ color:var(--green);
+ font-size:19px!important;
+ font-weight:800;
+}
+
+.minimum-row{
+ background:#fff8f8;
+ border:1px solid #ffd4d4;
+ border-radius:12px;
+ padding:13px;
 }
 
 .progress{
-    height:7px;
-    background:#e5e7eb;
-    border-radius:10px;
-    overflow:hidden;
-    margin-top:7px;
+ height:7px;
+ background:#e6ece8;
+ border-radius:20px;
+ overflow:hidden;
+ margin-top:12px;
 }
 
 .progress div{
-    height:100%;
-    background:#26965b;
+ height:100%;
+ background:linear-gradient(90deg,#1b8055,#38b77d);
+ border-radius:20px;
 }
 
-.empty{
-    text-align:center;
-    padding:25px;
-    color:#94a3b8;
+.note{
+ color:var(--muted);
+ font-size:13px;
+ line-height:1.7;
+ margin-top:12px;
 }
+
+.tablewrap{overflow-x:auto}
+
+table{
+ width:100%;
+ border-collapse:collapse;
+ min-width:650px;
+}
+
+th,td{
+ padding:12px 9px;
+ border-bottom:1px solid var(--border);
+ text-align:left;
+ font-size:13px;
+}
+
+th{background:#f0f7f2;color:#365c46}
+
+.actions{display:flex;gap:9px;flex-wrap:wrap}
+.actions button{flex:1;min-width:120px}
+
+.article-set{
+ display:flex;
+ justify-content:space-between;
+ padding:13px;
+ border-bottom:1px solid var(--border);
+}
+
+.article-set:nth-child(even){background:#f8fbf9}
+.article-set strong{color:var(--green)}
 
 footer{
-    text-align:center;
-    padding:20px;
-    color:#94a3b8;
-    font-size:13px;
+ text-align:center;
+ padding:20px;
+ color:#8b9b91;
+ font-size:12px;
 }
 
 @media(max-width:650px){
-    .grid{
-        grid-template-columns:1fr;
-    }
-
-    .form-grid{
-        grid-template-columns:1fr;
-        gap:0;
-    }
-
-    header h1{
-        font-size:21px;
-    }
-
-    .part-row{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .part-row .part-progress{
-        grid-column:1/-1;
-    }
+ body{padding:9px}
+ header{padding:23px 17px}
+ header h1{font-size:22px}
+ .card{padding:15px}
+ .grid{grid-template-columns:1fr}
+ .formgrid{grid-template-columns:1fr;gap:0}
+ .part-grid{grid-template-columns:repeat(2,1fr)}
+ .setbox strong{font-size:29px}
 }
 </style>
 </head>
@@ -285,713 +302,806 @@ footer{
 <div class="container">
 
 <header>
-    <h1>📊 Production Management</h1>
-    <p>Daily Production Tracking & Management System</p>
+<h1>📊 Production Management</h1>
+<p>Premium Article Wise Production & Material Tracking System</p>
 </header>
 
-<!-- COLOR TABS -->
 <div class="card">
-    <h2>কালার নির্বাচন করুন</h2>
-
-    <div class="tabs">
-        <button class="tab active" id="oliveTab"
-        onclick="selectColor('Olive')">🟢 Olive</button>
-
-        <button class="tab" id="tanTab"
-        onclick="selectColor('Tan')">🟤 Tan</button>
-    </div>
-
-    <div class="grid">
-
-        <div class="stat">
-            <small>মোট Target</small>
-            <h3 id="totalTarget">0</h3>
-        </div>
-
-        <div class="stat">
-            <small>মোট Production</small>
-            <h3 id="totalProduction">0</h3>
-        </div>
-
-        <div class="stat">
-            <small>বাকি Production</small>
-            <h3 id="totalPending">0</h3>
-        </div>
-
-    </div>
+<h2>📦 Article নির্বাচন করুন</h2>
+<select id="articleSelect" onchange="changeArticle()"></select>
 </div>
 
-<!-- PART SUMMARY -->
 <div class="card">
-    <h2>📦 পার্ট অনুযায়ী উৎপাদনের হিসাব</h2>
-    <div id="partSummary"></div>
+<h2>🧮 Article-এর মোট হিসাব</h2>
+
+<div class="setbox">
+<small>সর্বনিম্ন Part অনুযায়ী তৈরি করা সম্ভব মোট সেট</small>
+<strong id="setCount">0 সেট</strong>
+<div class="lowest" id="lowestPart"></div>
 </div>
 
-<!-- ADD PRODUCTION -->
+<div class="grid">
+<div class="stat">
+<small>মোট Target</small>
+<strong id="totalTarget">0</strong>
+</div>
+
+<div class="stat">
+<small>মোট Production</small>
+<strong id="totalProduction">0</strong>
+</div>
+
+<div class="stat">
+<small>মোট বাকি</small>
+<strong id="totalPending">0</strong>
+</div>
+</div>
+</div>
+
 <div class="card">
+<h2>📋 প্রতিটি Part-এর বিস্তারিত হিসাব</h2>
+<div id="partSummary"></div>
 
-    <h2>➕ নতুন Production যোগ করুন</h2>
+<p class="note">
+প্রতিটি Part-এর সেট সংখ্যা তার মোট মাল গ্রহণের পরিমাণ অনুযায়ী দেখানো হবে।
+যে Part-এর পরিমাণ সবচেয়ে কম, সেটি লাল রঙে চিহ্নিত হবে।
+</p>
+</div>
 
-    <div class="form-grid">
+<div class="card">
+<h2>📥 নতুন মাল গ্রহণ করুন</h2>
 
-        <div class="field">
-            <label>তারিখ</label>
-            <input type="date" id="date">
-        </div>
+<div class="formgrid">
 
-        <div class="field">
-            <label>কালার</label>
-            <select id="color">
-                <option value="Olive">Olive</option>
-                <option value="Tan">Tan</option>
-            </select>
-        </div>
+<div class="field">
+<label>তারিখ</label>
+<input type="date" id="receiveDate">
+</div>
 
-        <div class="field">
-            <label>পার্ট নির্বাচন</label>
-            <select id="part">
-                <option value="Backpart">Backpart</option>
-                <option value="Front zipar part">Front zipar part</option>
-                <option value="R">R</option>
-                <option value="L">L</option>
-                <option value="Top part">Top part</option>
-            </select>
-        </div>
+<div class="field">
+<label>Article</label>
+<select id="receiveArticle"></select>
+</div>
 
-        <div class="field">
-            <label>Production Quantity</label>
-            <input type="number" id="quantity"
-            placeholder="পরিমাণ লিখুন" min="1">
-        </div>
+<div class="field">
+<label>Part</label>
+<select id="receivePart"></select>
+</div>
 
-    </div>
-
-    <button class="primary" onclick="addProduction()">
-        + Production যোগ করুন
-    </button>
+<div class="field">
+<label>মাল নিয়েছি (Quantity)</label>
+<input type="number" id="receiveQty" min="1" placeholder="পরিমাণ লিখুন">
+</div>
 
 </div>
 
-<!-- TARGET SETTINGS -->
+<button class="primary" onclick="addReceived()">+ মাল গ্রহণ যোগ করুন</button>
+</div>
+
 <div class="card">
+<h2>🏭 নতুন Production যোগ করুন</h2>
 
-    <h2>🎯 Target সেটিংস</h2>
+<div class="formgrid">
 
-    <p style="color:#64748b;font-size:13px;margin-bottom:15px">
-        প্রতিটি পার্টের Target পরিবর্তন করতে পারবেন।
-    </p>
+<div class="field">
+<label>তারিখ</label>
+<input type="date" id="productionDate">
+</div>
 
-    <div id="targetSettings"></div>
+<div class="field">
+<label>Article</label>
+<select id="productionArticle"></select>
+</div>
 
-    <button class="primary" onclick="saveTargets()">
-        Target Save করুন
-    </button>
+<div class="field">
+<label>Part</label>
+<select id="productionPart"></select>
+</div>
+
+<div class="field">
+<label>Production Quantity</label>
+<input type="number" id="productionQty" min="1" placeholder="পরিমাণ লিখুন">
+</div>
 
 </div>
 
-<!-- HISTORY -->
-<div class="card">
-
-    <h2>📋 Production History</h2>
-
-    <div class="field">
-        <label>কালার অনুযায়ী ফিল্টার</label>
-        <select id="historyFilter" onchange="renderHistory()">
-            <option value="All">সব কালার</option>
-            <option value="Olive">Olive</option>
-            <option value="Tan">Tan</option>
-        </select>
-    </div>
-
-    <div class="table-wrap">
-        <table>
-            <thead>
-                <tr>
-                    <th>তারিখ</th>
-                    <th>কালার</th>
-                    <th>পার্ট</th>
-                    <th>পরিমাণ</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-
-            <tbody id="historyBody"></tbody>
-        </table>
-    </div>
-
+<button class="primary" onclick="addProduction()">+ Production যোগ করুন</button>
 </div>
 
-<!-- REPORT AND BACKUP -->
 <div class="card">
-
-    <h2>📁 রিপোর্ট ও ডেটা ব্যাকআপ</h2>
-
-    <div class="actions">
-
-        <button class="secondary" onclick="downloadCSV()">
-            📥 Excel/CSV Report
-        </button>
-
-        <button class="secondary" onclick="backupData()">
-            💾 Backup
-        </button>
-
-        <button class="secondary" onclick="document.getElementById('restoreFile').click()">
-            📂 Restore
-        </button>
-
-        <input type="file" id="restoreFile"
-        accept=".json" style="display:none"
-        onchange="restoreData(event)">
-
-    </div>
-
+<h2>🎯 Target পরিবর্তন করুন</h2>
+<div id="targetSettings"></div>
+<button class="primary" onclick="saveTargets()">Target Save করুন</button>
 </div>
 
-<footer>
-    Production Management System • All Data Saved Automatically
-</footer>
+<div class="card">
+<h2>📚 হিসাবের History</h2>
+
+<div class="field">
+<label>হিসাবের ধরন</label>
+<select id="historyType" onchange="renderHistory()">
+<option value="received">মাল গ্রহণ</option>
+<option value="production">Production</option>
+</select>
+</div>
+
+<div class="field">
+<label>Article Filter</label>
+<select id="historyArticle" onchange="renderHistory()"></select>
+</div>
+
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>তারিখ</th>
+<th>Article</th>
+<th>Part</th>
+<th>Quantity</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody id="historyBody"></tbody>
+</table>
+</div>
+</div>
+
+<div class="card">
+<h2>📊 সব Article-এর সেট হিসাব</h2>
+<div id="allArticleSets"></div>
+</div>
+
+<div class="card">
+<h2>💾 Backup & Report</h2>
+<div class="actions">
+<button class="secondary" onclick="downloadCSV()">📥 CSV Report</button>
+<button class="secondary" onclick="backupData()">💾 Backup Download</button>
+<button class="secondary" onclick="document.getElementById('restoreFile').click()">📂 Backup Restore</button>
+<input type="file" id="restoreFile" accept=".json" style="display:none" onchange="restoreData(event)">
+</div>
+</div>
+
+<footer>Premium Production Management System</footer>
 
 </div>
 
 <script>
 
-// ===============================
-// BASIC SETTINGS
-// ===============================
+// সব Article
 
-const parts = [
-    "Backpart",
-    "Front zipar part",
-    "R",
-    "L",
-    "Top part"
+const articles=[
+"Olive",
+"Tan",
+"Black",
+"Navy Blue",
+"Maroon",
+"Chocolate",
+"Grey",
+"Royal Blue",
+"Coffee",
+"Ash",
+"Khaki",
+"Beige"
 ];
 
-const defaultTargets = {
-    Olive:{
-        "Backpart":13635,
-        "Front zipar part":13980,
-        "R":14700,
-        "L":15172,
-        "Top part":15855
-    },
+// সব Part
 
-    Tan:{
-        "Backpart":21693,
-        "Front zipar part":21185,
-        "R":21590,
-        "L":21130,
-        "Top part":21131
-    }
+const parts=[
+"Backpart",
+"Front zipar part",
+"R",
+"L",
+"Top part"
+];
+
+// আগের Target
+
+const oldTargets={
+Olive:{
+"Backpart":13635,
+"Front zipar part":13980,
+"R":14700,
+"L":15172,
+"Top part":15855
+},
+Tan:{
+"Backpart":21693,
+"Front zipar part":21185,
+"R":21590,
+"L":21130,
+"Top part":21131
+}
 };
 
-let currentColor = "Olive";
+// ডেটা লোড
 
-let entries = JSON.parse(
-    localStorage.getItem("productionEntries") || "[]"
+function readJSON(key,fallback){
+try{
+return JSON.parse(localStorage.getItem(key)) ?? fallback;
+}catch(e){
+return fallback;
+}
+}
+
+let production=readJSON("productionEntries",[]).map(x=>({
+...x,
+article:x.article||x.color||"Olive"
+}));
+
+let received=readJSON("receivedEntries",[]).map(x=>({
+...x,
+article:x.article||x.color||"Olive"
+}));
+
+let savedTargets=readJSON("productionTargets",null);
+
+let targets={};
+
+articles.forEach(a=>{
+targets[a]={};
+
+parts.forEach(p=>{
+targets[a][p]=Number(
+(savedTargets && savedTargets[a] && savedTargets[a][p])
+??
+(oldTargets[a] && oldTargets[a][p])
+??
+0
 );
+});
+});
 
-let targets = JSON.parse(
-    localStorage.getItem("productionTargets") || "null"
-);
+let currentArticle="Olive";
 
-if(!targets){
-    targets = JSON.parse(JSON.stringify(defaultTargets));
+// তারিখ
+
+function today(){
+let d=new Date();
+return d.getFullYear()+"-"+
+String(d.getMonth()+1).padStart(2,"0")+"-"+
+String(d.getDate()).padStart(2,"0");
 }
 
-// ===============================
-// SAVE DATA
-// ===============================
+// Options
 
-function saveData(){
-
-    localStorage.setItem(
-        "productionEntries",
-        JSON.stringify(entries)
-    );
-
-    localStorage.setItem(
-        "productionTargets",
-        JSON.stringify(targets)
-    );
-
+function options(){
+return articles.map(a=>`<option value="${a}">${a}</option>`).join("");
 }
 
-// ===============================
-// SELECT COLOR
-// ===============================
-
-function selectColor(color){
-
-    currentColor = color;
-
-    document.getElementById("oliveTab")
-    .classList.toggle("active",color==="Olive");
-
-    document.getElementById("tanTab")
-    .classList.toggle("active",color==="Tan");
-
-    document.getElementById("color").value=color;
-
-    renderAll();
-
+function partOptions(){
+return parts.map(p=>`<option value="${p}">${p}</option>`).join("");
 }
 
-// ===============================
-// GET PRODUCTION
-// ===============================
+// শুরু
 
-function getMade(color,part){
+function init(){
 
-    return entries
-    .filter(item =>
-        item.color === color &&
-        item.part === part
-    )
-    .reduce((sum,item)=>sum+Number(item.quantity),0);
+document.getElementById("articleSelect").innerHTML=options();
+document.getElementById("receiveArticle").innerHTML=options();
+document.getElementById("productionArticle").innerHTML=options();
+
+document.getElementById("historyArticle").innerHTML=
+'<option value="All">সব Article</option>'+options();
+
+document.getElementById("receivePart").innerHTML=partOptions();
+document.getElementById("productionPart").innerHTML=partOptions();
+
+document.getElementById("receiveDate").value=today();
+document.getElementById("productionDate").value=today();
+
+document.getElementById("articleSelect").value="Olive";
+document.getElementById("receiveArticle").value="Olive";
+document.getElementById("productionArticle").value="Olive";
+
+renderAll();
+}
+
+// Save
+
+function save(){
+
+localStorage.setItem("productionEntries",JSON.stringify(production));
+localStorage.setItem("receivedEntries",JSON.stringify(received));
+localStorage.setItem("productionTargets",JSON.stringify(targets));
 
 }
 
-// ===============================
-// ADD PRODUCTION
-// ===============================
+// Article পরিবর্তন
+
+function changeArticle(){
+
+currentArticle=document.getElementById("articleSelect").value;
+
+renderAll();
+
+}
+
+// মাল গ্রহণের মোট হিসাব
+
+function sumReceived(article,part){
+
+return received
+.filter(x=>x.article===article && x.part===part)
+.reduce((sum,x)=>sum+Number(x.quantity),0);
+
+}
+
+// Production-এর মোট হিসাব
+
+function sumProduction(article,part){
+
+return production
+.filter(x=>x.article===article && x.part===part)
+.reduce((sum,x)=>sum+Number(x.quantity),0);
+
+}
+
+// প্রতিটি Part-এর সেট ও সর্বনিম্ন সেট
+
+function getSetInfo(article){
+
+let list=parts.map(part=>({
+part:part,
+qty:sumReceived(article,part)
+}));
+
+let minimum=Math.min(...list.map(x=>x.qty));
+
+return{
+list,
+minimum,
+lowestParts:list.filter(x=>x.qty===minimum)
+};
+
+}
+
+// মাল গ্রহণ যোগ
+
+function addReceived(){
+
+let date=document.getElementById("receiveDate").value;
+let article=document.getElementById("receiveArticle").value;
+let part=document.getElementById("receivePart").value;
+let qty=Number(document.getElementById("receiveQty").value);
+
+if(!date || !Number.isFinite(qty) || qty<=0){
+alert("সঠিক তারিখ ও Quantity দিন");
+return;
+}
+
+received.push({
+id:Date.now()+Math.random(),
+date,
+article,
+part,
+quantity:qty
+});
+
+save();
+
+currentArticle=article;
+document.getElementById("articleSelect").value=article;
+document.getElementById("receiveQty").value="";
+
+renderAll();
+
+alert("মাল গ্রহণের হিসাব যোগ হয়েছে!");
+
+}
+
+// Production যোগ
 
 function addProduction(){
 
-    const date = document.getElementById("date").value;
-    const color = document.getElementById("color").value;
-    const part = document.getElementById("part").value;
+let date=document.getElementById("productionDate").value;
+let article=document.getElementById("productionArticle").value;
+let part=document.getElementById("productionPart").value;
+let qty=Number(document.getElementById("productionQty").value);
 
-    const quantity = Number(
-        document.getElementById("quantity").value
-    );
+if(!date || !Number.isFinite(qty) || qty<=0){
+alert("সঠিক তারিখ ও Quantity দিন");
+return;
+}
 
-    if(!date){
-        alert("তারিখ নির্বাচন করুন");
-        return;
-    }
+production.push({
+id:Date.now()+Math.random(),
+date,
+article,
+part,
+quantity:qty
+});
 
-    if(!quantity || quantity <= 0){
-        alert("সঠিক Production Quantity লিখুন");
-        return;
-    }
+save();
 
-    const entry = {
-        id:Date.now() + Math.random(),
-        date:date,
-        color:color,
-        part:part,
-        quantity:quantity
-    };
+currentArticle=article;
+document.getElementById("articleSelect").value=article;
+document.getElementById("productionQty").value="";
 
-    entries.push(entry);
+renderAll();
 
-    // সব ডেটা সেভ হবে
-    saveData();
-
-    // নির্বাচিত কালারের হিসাব দেখাবে
-    selectColor(color);
-
-    document.getElementById("quantity").value="";
-
-    alert("Production সফলভাবে যোগ হয়েছে!");
+alert("Production যোগ হয়েছে!");
 
 }
 
-// ===============================
-// TOTAL SUMMARY
-// ===============================
+// Summary
 
 function renderSummary(){
 
-    let totalTarget = 0;
-    let totalProduction = 0;
+let totalTarget=0;
+let totalProduction=0;
 
-    parts.forEach(part=>{
+parts.forEach(part=>{
+totalTarget+=Number(targets[currentArticle][part]||0);
+totalProduction+=sumProduction(currentArticle,part);
+});
 
-        const target = Number(
-            targets[currentColor][part] || 0
-        );
+document.getElementById("totalTarget").textContent=
+totalTarget.toLocaleString();
 
-        const made = getMade(currentColor,part);
+document.getElementById("totalProduction").textContent=
+totalProduction.toLocaleString();
 
-        totalTarget += target;
-        totalProduction += made;
+document.getElementById("totalPending").textContent=
+Math.max(0,totalTarget-totalProduction).toLocaleString();
 
-    });
+let info=getSetInfo(currentArticle);
 
-    document.getElementById("totalTarget")
-    .innerText=totalTarget.toLocaleString();
+document.getElementById("setCount").textContent=
+info.minimum.toLocaleString()+" সেট";
 
-    document.getElementById("totalProduction")
-    .innerText=totalProduction.toLocaleString();
+let lowestNames=info.lowestParts.map(x=>x.part).join(", ");
 
-    document.getElementById("totalPending")
-    .innerText=Math.max(0,totalTarget-totalProduction)
-    .toLocaleString();
-
-}
-
-// ===============================
-// PART SUMMARY
-// ===============================
-
-function renderPartSummary(){
-
-    let html="";
-
-    parts.forEach(part=>{
-
-        const target=Number(
-            targets[currentColor][part] || 0
-        );
-
-        const made=getMade(currentColor,part);
-
-        const pending=Math.max(0,target-made);
-
-        const percent=target>0
-        ? Math.min(100,(made/target)*100)
-        : 0;
-
-        html+=`
-
-        <div class="part-row">
-
-            <div>
-                <strong>${part}</strong>
-                <div class="part-progress">
-                    <div class="progress">
-                        <div style="width:${percent}%"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div>
-                <span>Production</span>
-                <br>
-                <strong>${made.toLocaleString()}</strong>
-            </div>
-
-            <div>
-                <span>Target / Pending</span>
-                <br>
-                <strong>${target.toLocaleString()}</strong>
-                <br>
-                <span>বাকি: ${pending.toLocaleString()}</span>
-            </div>
-
-        </div>
-
-        `;
-
-    });
-
-    document.getElementById("partSummary").innerHTML=html;
+document.getElementById("lowestPart").textContent=
+"সর্বনিম্ন Part: "+lowestNames+
+" — "+info.minimum.toLocaleString()+" সেট";
 
 }
 
-// ===============================
-// TARGET SETTINGS
-// ===============================
+// প্রতিটি Part-এর হিসাব
 
-function renderTargetSettings(){
+function renderParts(){
 
-    let html="";
+let html="";
 
-    parts.forEach(part=>{
+let info=getSetInfo(currentArticle);
 
-        html+=`
+parts.forEach(part=>{
 
-        <div class="field">
+let target=Number(targets[currentArticle][part]||0);
 
-            <label>${part} Target</label>
+let made=sumProduction(currentArticle,part);
 
-            <input
-                type="number"
-                min="0"
-                id="target_${part}"
-                value="${targets[currentColor][part]}"
-            >
+let receivedQty=sumReceived(currentArticle,part);
 
-        </div>
+let pending=Math.max(0,target-made);
 
-        `;
+let percent=target?
+Math.min(100,made/target*100):0;
 
-    });
+let isMinimum=receivedQty===info.minimum;
 
-    document.getElementById("targetSettings").innerHTML=html;
+html+=`
+
+<div class="part-row ${isMinimum?'minimum-row':''}">
+
+<div class="part-head">
+
+<span class="part-name">${part}</span>
+
+${isMinimum
+?'<span class="minimum-badge">🔴 সর্বনিম্ন সেট</span>'
+:'<span class="badge">সেট: '+receivedQty.toLocaleString()+'</span>'}
+
+</div>
+
+<div class="part-grid">
+
+<div class="part-box">
+<small>মোট মাল নিয়েছি</small>
+<strong>${receivedQty.toLocaleString()}</strong>
+</div>
+
+<div class="part-box">
+<small>এই Part-এর সেট</small>
+<strong class="set-value">${receivedQty.toLocaleString()}</strong>
+</div>
+
+<div class="part-box">
+<small>Production</small>
+<strong>${made.toLocaleString()}</strong>
+</div>
+
+<div class="part-box">
+<small>Target / বাকি</small>
+<strong>${target.toLocaleString()} / ${pending.toLocaleString()}</strong>
+</div>
+
+</div>
+
+<div class="progress">
+<div style="width:${percent}%"></div>
+</div>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("partSummary").innerHTML=html;
 
 }
 
-// ===============================
-// SAVE TARGETS
-// ===============================
+// Target Settings
+
+function renderTargets(){
+
+document.getElementById("targetSettings").innerHTML=
+parts.map(part=>`
+
+<div class="field">
+
+<label>${part} Target</label>
+
+<input
+type="number"
+min="0"
+id="target_${part}"
+value="${targets[currentArticle][part]}"
+>
+
+</div>
+
+`).join("");
+
+}
+
+// Target Save
 
 function saveTargets(){
 
-    parts.forEach(part=>{
+let next={};
 
-        const value=Number(
-            document.getElementById("target_"+part).value
-        );
+for(let part of parts){
 
-        if(value < 0 || !Number.isFinite(value)){
-            alert("সঠিক Target লিখুন");
-            return;
-        }
+let value=document.getElementById("target_"+part).value;
 
-        targets[currentColor][part]=value;
+let number=Number(value);
 
-    });
+if(value.trim()==="" || !Number.isFinite(number) || number<0){
+alert(part+" এর সঠিক Target দিন");
+return;
+}
 
-    saveData();
-
-    renderAll();
-
-    alert("Target সফলভাবে Save হয়েছে!");
+next[part]=number;
 
 }
 
-// ===============================
-// HISTORY
-// ===============================
+targets[currentArticle]=next;
+
+save();
+renderAll();
+
+alert("Target Save হয়েছে!");
+
+}
+
+// History
 
 function renderHistory(){
 
-    const filter=document.getElementById("historyFilter").value;
+let type=document.getElementById("historyType").value;
+let filter=document.getElementById("historyArticle").value;
 
-    let filtered=entries.filter(item=>
-        filter==="All" || item.color===filter
-    );
+let arr=(type==="received"?received:production)
+.filter(x=>filter==="All"||x.article===filter)
+.slice()
+.sort((a,b)=>b.date.localeCompare(a.date));
 
-    filtered.sort((a,b)=>
-        b.date.localeCompare(a.date)
-    );
+document.getElementById("historyBody").innerHTML=
+arr.length
+?arr.map(x=>`
 
-    let html="";
+<tr>
+<td>${x.date}</td>
+<td>${x.article}</td>
+<td>${x.part}</td>
+<td>${Number(x.quantity).toLocaleString()}</td>
+<td>
+<button class="danger" onclick="deleteEntry('${type}','${x.id}')">
+Delete
+</button>
+</td>
+</tr>
 
-    if(filtered.length===0){
-
-        html=`
-        <tr>
-            <td colspan="5" class="empty">
-                এখনো কোনো Production Entry নেই
-            </td>
-        </tr>
-        `;
-
-    }else{
-
-        filtered.forEach(item=>{
-
-            html+=`
-
-            <tr>
-
-                <td>${item.date}</td>
-
-                <td>
-                    <span class="badge">${item.color}</span>
-                </td>
-
-                <td>${item.part}</td>
-
-                <td>
-                    <strong>${Number(item.quantity).toLocaleString()}</strong>
-                </td>
-
-                <td>
-                    <button class="delete"
-                    onclick="deleteEntry('${item.id}')">
-                        Delete
-                    </button>
-                </td>
-
-            </tr>
-
-            `;
-
-        });
-
-    }
-
-    document.getElementById("historyBody").innerHTML=html;
+`).join("")
+:'<tr><td colspan="5">কোনো হিসাব নেই</td></tr>';
 
 }
 
-// ===============================
-// DELETE ENTRY
-// ===============================
+// Delete
 
-function deleteEntry(id){
+function deleteEntry(type,id){
 
-    if(!confirm("এই Production Entry মুছে ফেলতে চান?")){
-        return;
-    }
+if(!confirm("এই হিসাবটি মুছে ফেলবেন?"))return;
 
-    entries=entries.filter(item=>
-        String(item.id)!==String(id)
-    );
+if(type==="received"){
+received=received.filter(x=>String(x.id)!==String(id));
+}else{
+production=production.filter(x=>String(x.id)!==String(id));
+}
 
-    saveData();
-
-    renderAll();
+save();
+renderAll();
 
 }
 
-// ===============================
-// DOWNLOAD CSV
-// ===============================
+// সব Article-এর সেট
 
-function downloadCSV(){
+function renderAllArticleSets(){
 
-    let csv="\uFEFFDate,Color,Part,Quantity\n";
+document.getElementById("allArticleSets").innerHTML=
+articles.map(article=>{
 
-    entries.forEach(item=>{
+let info=getSetInfo(article);
 
-        csv+=`${item.date},${item.color},"${item.part}",${item.quantity}\n`;
+let lowest=info.lowestParts.map(x=>x.part).join(", ");
 
-    });
+return`
 
-    const blob=new Blob([csv],{
-        type:"text/csv;charset=utf-8;"
-    });
+<div class="article-set">
 
-    const url=URL.createObjectURL(blob);
+<span>${article}</span>
 
-    const a=document.createElement("a");
+<strong>
+${info.minimum.toLocaleString()} সেট
+</strong>
 
-    a.href=url;
-    a.download="production-report.csv";
-    a.click();
+</div>
 
-    URL.revokeObjectURL(url);
+`;
 
-}
-
-// ===============================
-// BACKUP DATA
-// ===============================
-
-function backupData(){
-
-    const data={
-        entries:entries,
-        targets:targets
-    };
-
-    const blob=new Blob(
-        [JSON.stringify(data,null,2)],
-        {type:"application/json"}
-    );
-
-    const url=URL.createObjectURL(blob);
-
-    const a=document.createElement("a");
-
-    a.href=url;
-    a.download="production-backup.json";
-    a.click();
-
-    URL.revokeObjectURL(url);
+}).join("");
 
 }
 
-// ===============================
-// RESTORE DATA
-// ===============================
-
-function restoreData(event){
-
-    const file=event.target.files[0];
-
-    if(!file)return;
-
-    const reader=new FileReader();
-
-    reader.onload=function(e){
-
-        try{
-
-            const data=JSON.parse(e.target.result);
-
-            if(!Array.isArray(data.entries) ||
-               !data.targets ||
-               !data.targets.Olive ||
-               !data.targets.Tan){
-                throw new Error("Invalid backup");
-            }
-
-            entries=data.entries;
-
-            targets=data.targets;
-
-            saveData();
-
-            renderAll();
-
-            alert("Backup সফলভাবে Restore হয়েছে!");
-
-        }catch(error){
-
-            alert("ভুল Backup File!");
-
-        }
-
-        event.target.value="";
-
-    };
-
-    reader.readAsText(file);
-
-}
-
-// ===============================
-// RENDER EVERYTHING
-// ===============================
+// সব Refresh
 
 function renderAll(){
 
-    renderSummary();
-
-    renderPartSummary();
-
-    renderTargetSettings();
-
-    renderHistory();
+renderSummary();
+renderParts();
+renderTargets();
+renderHistory();
+renderAllArticleSets();
 
 }
 
-// ===============================
-// INITIALIZE
-// ===============================
+// CSV Report
 
-function getLocalDate(){
+function downloadCSV(){
 
-    const now=new Date();
+let rows=[
+["Type","Date","Article","Part","Quantity"]
+];
 
-    const year=now.getFullYear();
+received.forEach(x=>{
+rows.push(["Material Received",x.date,x.article,x.part,x.quantity]);
+});
 
-    const month=String(now.getMonth()+1).padStart(2,"0");
+production.forEach(x=>{
+rows.push(["Production",x.date,x.article,x.part,x.quantity]);
+});
 
-    const day=String(now.getDate()).padStart(2,"0");
+let csv="\uFEFF"+rows.map(row=>
+row.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(",")
+).join("\n");
 
-    return `${year}-${month}-${day}`;
+let blob=new Blob([csv],{type:"text/csv;charset=utf-8"});
+
+let url=URL.createObjectURL(blob);
+
+let a=document.createElement("a");
+a.href=url;
+a.download="production-report.csv";
+a.click();
+
+URL.revokeObjectURL(url);
 
 }
 
-document.getElementById("date").value=getLocalDate();
+// Backup
 
-document.getElementById("color").addEventListener(
-    "change",function(){
-        currentColor=this.value;
-        selectColor(currentColor);
-    }
+function backupData(){
+
+let data={
+production,
+received,
+targets
+};
+
+let blob=new Blob(
+[JSON.stringify(data,null,2)],
+{type:"application/json"}
 );
 
+let url=URL.createObjectURL(blob);
+
+let a=document.createElement("a");
+a.href=url;
+a.download="production-backup.json";
+a.click();
+
+URL.revokeObjectURL(url);
+
+}
+
+// Restore
+
+function restoreData(event){
+
+let file=event.target.files[0];
+
+if(!file)return;
+
+let reader=new FileReader();
+
+reader.onload=e=>{
+
+try{
+
+let data=JSON.parse(e.target.result);
+
+if(!Array.isArray(data.production)||
+!Array.isArray(data.received)||
+!data.targets){
+throw Error();
+}
+
+production=data.production.map(x=>({
+...x,
+article:x.article||x.color||"Olive"
+}));
+
+received=data.received.map(x=>({
+...x,
+article:x.article||x.color||"Olive"
+}));
+
+targets=data.targets;
+
+articles.forEach(a=>{
+
+if(!targets[a])targets[a]={};
+
+parts.forEach(p=>{
+targets[a][p]=Number(targets[a][p]||0);
+});
+
+});
+
+save();
 renderAll();
+
+alert("Backup সফলভাবে Restore হয়েছে!");
+
+}catch(error){
+
+alert("Backup ফাইলটি সঠিক নয়!");
+
+}
+
+event.target.value="";
+
+};
+
+reader.readAsText(file);
+
+}
+
+// Start
+
+init();
 
 </script>
 
