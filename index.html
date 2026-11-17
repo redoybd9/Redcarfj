@@ -2,1108 +2,650 @@
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Premium Production Management</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Smart ERP | Bag Manufacturing</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700;800&display=swap');
-
 :root{
- --green:#176b49;
- --green2:#26966b;
- --dark:#102d23;
- --bg:#f3f6f5;
- --red:#dc3545;
- --text:#26352e;
- --muted:#718078;
- --border:#e7eeea;
+ --bg:#f3f6fc;
+ --card:#fff;
+ --text:#17233d;
+ --muted:#7b879c;
+ --primary:#4568f5;
+ --green:#0caa79;
+ --red:#e34f64;
+ --orange:#eea33a;
+ --border:#e8edf5;
+ --sidebar:#101b35;
+ --shadow:0 8px 28px rgba(28,45,90,.06);
 }
-
-*{box-sizing:border-box;font-family:'Hind Siliguri',sans-serif}
-
+body.dark{
+ --bg:#0d1425;
+ --card:#172239;
+ --text:#edf2ff;
+ --muted:#9ca9c0;
+ --border:#293650;
+ --sidebar:#080f20;
+ --shadow:0 8px 28px rgba(0,0,0,.15);
+}
+*{box-sizing:border-box}
 body{
- margin:0;
- padding:14px;
- background:var(--bg);
- color:var(--text);
+ margin:0;background:var(--bg);color:var(--text);
+ font-family:'Hind Siliguri',sans-serif;
+ transition:.2s;
 }
-
-.container{max-width:1100px;margin:auto}
-
-header{
- background:linear-gradient(125deg,#102d23,#176b49,#26966b);
- color:white;
- padding:27px 22px;
- border-radius:19px;
- margin-bottom:18px;
- box-shadow:0 9px 28px #176b4930;
+button,input,select{font-family:inherit}
+button{cursor:pointer}
+.app{display:flex;min-height:100vh}
+.sidebar{
+ width:245px;background:var(--sidebar);color:white;
+ padding:22px 14px;position:fixed;inset:0 auto 0 0;
+ z-index:10;overflow-y:auto;
 }
-
-header h1{margin:0 0 7px;font-size:25px}
-header p{margin:0;color:#d8f2e4;font-size:14px}
-
-.card{
- background:white;
- padding:19px;
- border-radius:16px;
- margin-bottom:17px;
- box-shadow:0 5px 22px #193c2b0c;
- border:1px solid #edf1ef;
-}
-
-h2{
- margin:0 0 16px;
- font-size:19px;
- color:#1b3c2c;
-}
-
-label{
- display:block;
- font-size:14px;
- font-weight:600;
- margin-bottom:7px;
-}
-
-input,select{
- width:100%;
- padding:12px;
- border:1px solid #dce6df;
- border-radius:10px;
- font-size:15px;
- outline:none;
- background:#fbfdfb;
-}
-
-input:focus,select:focus{
- border-color:var(--green2);
- box-shadow:0 0 0 3px #26966b18;
-}
-
-.field{margin-bottom:13px}
-
-.grid{
- display:grid;
- grid-template-columns:repeat(3,1fr);
- gap:11px;
-}
-
-.stat{
- background:#eff8f2;
- border:1px solid #dceee2;
- padding:16px;
- border-radius:13px;
-}
-
-.stat small{
- display:block;
- color:#698073;
- margin-bottom:7px;
-}
-
-.stat strong{
- color:var(--green);
- font-size:24px;
-}
-
-.setbox{
- background:linear-gradient(120deg,#e8f7ed,#f4fbf6);
- border:1px solid #cce8d5;
- border-radius:14px;
- padding:18px;
- margin-bottom:14px;
-}
-
-.setbox small{display:block;color:#527761;margin-bottom:5px}
-.setbox strong{font-size:32px;color:#176b49}
-.setbox .lowest{font-size:14px;color:#b42332;margin-top:7px;font-weight:700}
-
-.formgrid{
- display:grid;
- grid-template-columns:repeat(2,1fr);
- gap:12px;
-}
-
-button{cursor:pointer;transition:.2s}
-button:active{transform:scale(.98)}
-
-.primary{
- background:linear-gradient(120deg,#176b49,#26966b);
- color:white;
- border:0;
- width:100%;
- padding:14px;
- border-radius:10px;
- font-size:16px;
- font-weight:700;
- box-shadow:0 5px 13px #176b4925;
-}
-
-.secondary{
- background:#eff8f2;
- color:#176b49;
- border:1px solid #cfe5d6;
- padding:10px 13px;
- border-radius:9px;
- font-weight:600;
-}
-
-.danger{
- background:#fff0f0;
- color:#c62828;
- border:0;
- padding:7px 10px;
- border-radius:7px;
-}
-
-.part-row{
- padding:17px 0;
- border-bottom:1px solid var(--border);
-}
-
-.part-row:last-child{border-bottom:0}
-
-.part-head{
- display:flex;
- justify-content:space-between;
+.logo{padding:8px 10px 25px;border-bottom:1px solid #ffffff20}
+.logo h2{margin:0;font-size:21px}
+.logo small{color:#aab7d2}
+.menu-title{font-size:11px;color:#8492b0;margin:24px 10px 9px}
+.nav{
+ width:100%;border:0;background:transparent;color:#b7c3dc;
+ padding:12px 13px;text-align:left;border-radius:10px;
+ margin:3px 0;font-size:15px;display:flex;gap:12px;
  align-items:center;
- gap:8px;
- margin-bottom:12px;
 }
-
-.part-name{font-size:17px;font-weight:700}
-
-.badge{
- display:inline-block;
- background:#eaf5ee;
- color:#176b49;
- padding:5px 10px;
- border-radius:20px;
- font-size:12px;
- font-weight:700;
+.nav:hover,.nav.active{background:#3458d9;color:white}
+.main{margin-left:245px;width:calc(100% - 245px);padding:25px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:23px}
+.topbar h1{font-size:25px;margin:0}
+.topbar p{margin:3px 0;color:var(--muted);font-size:13px}
+.top-actions{display:flex;gap:8px}
+.icon-btn{border:1px solid var(--border);background:var(--card);color:var(--text);border-radius:10px;padding:9px 13px}
+.page{display:none}
+.page.active{display:block}
+.card{
+ background:var(--card);border:1px solid var(--border);
+ border-radius:16px;padding:19px;margin-bottom:18px;
+ box-shadow:var(--shadow);
 }
-
-.minimum-badge{
- background:#ffe7e7;
- color:#c62828;
- padding:5px 10px;
- border-radius:20px;
- font-size:12px;
- font-weight:700;
+.card-title{font-size:18px;font-weight:700;margin:0 0 16px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:15px;padding:18px;box-shadow:var(--shadow)}
+.stat small{color:var(--muted)}
+.stat h2{font-size:26px;margin:8px 0 0}
+.stat .ico{font-size:23px;float:right}
+.blue{border-top:3px solid var(--primary)}
+.green{border-top:3px solid var(--green)}
+.red{border-top:3px solid var(--red)}
+.orange{border-top:3px solid var(--orange)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+label{display:block;font-size:13px;font-weight:600;margin-bottom:6px}
+input,select{
+ width:100%;padding:11px 12px;border:1px solid var(--border);
+ border-radius:9px;background:var(--bg);color:var(--text);
+ outline:none;font-size:14px;
 }
-
-.part-grid{
- display:grid;
- grid-template-columns:repeat(4,1fr);
- gap:8px;
+input:focus,select:focus{border-color:var(--primary)}
+.field{margin-bottom:13px}
+.btn{
+ border:0;border-radius:9px;padding:10px 16px;
+ font-size:14px;font-weight:600;
 }
-
-.part-box{
- background:#f7faf8;
- padding:11px 8px;
- border-radius:10px;
- border:1px solid #edf1ef;
+.btn-primary{background:var(--primary);color:white}
+.btn-green{background:var(--green);color:white}
+.btn-red{background:#fff0f1;color:#d73d52}
+.btn-light{background:var(--bg);color:var(--text);border:1px solid var(--border)}
+.btn-orange{background:#fff3df;color:#a96a0d}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:650px}
+th,td{padding:12px 10px;text-align:left;border-bottom:1px solid var(--border);font-size:13px}
+th{background:var(--bg);color:var(--muted);font-weight:700;white-space:nowrap}
+.badge{border-radius:30px;padding:4px 9px;font-size:11px;font-weight:700}
+.b-in{background:#e1f8ef;color:#07875e}
+.b-out{background:#ffe8eb;color:#cf4054}
+.b-low{background:#fff0dc;color:#b16c09}
+.progress{height:7px;background:var(--bg);border-radius:20px;margin-top:8px;overflow:hidden}
+.progress span{display:block;height:100%;background:var(--green);border-radius:20px}
+.part{border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:10px}
+.part h3{font-size:15px;margin:0 0 12px}
+.part-data{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.part-data small{color:var(--muted)}
+.part-data strong{display:block;font-size:18px;margin-top:3px}
+.muted{color:var(--muted)}
+.hidden{display:none!important}
+.empty{text-align:center;color:var(--muted);padding:25px}
+.overlay{display:none}
+@media(max-width:900px){
+ .sidebar{width:215px}
+ .main{margin-left:215px;width:calc(100% - 215px);padding:18px}
+ .stats{grid-template-columns:repeat(2,1fr)}
+ .grid2{grid-template-columns:1fr}
 }
-
-.part-box small{
- display:block;
- color:var(--muted);
- font-size:12px;
- margin-bottom:5px;
-}
-
-.part-box strong{font-size:16px}
-
-.set-value{
- color:var(--green);
- font-size:19px!important;
- font-weight:800;
-}
-
-.minimum-row{
- background:#fff8f8;
- border:1px solid #ffd4d4;
- border-radius:12px;
- padding:13px;
-}
-
-.progress{
- height:7px;
- background:#e6ece8;
- border-radius:20px;
- overflow:hidden;
- margin-top:12px;
-}
-
-.progress div{
- height:100%;
- background:linear-gradient(90deg,#1b8055,#38b77d);
- border-radius:20px;
-}
-
-.note{
- color:var(--muted);
- font-size:13px;
- line-height:1.7;
- margin-top:12px;
-}
-
-.tablewrap{overflow-x:auto}
-
-table{
- width:100%;
- border-collapse:collapse;
- min-width:650px;
-}
-
-th,td{
- padding:12px 9px;
- border-bottom:1px solid var(--border);
- text-align:left;
- font-size:13px;
-}
-
-th{background:#f0f7f2;color:#365c46}
-
-.actions{display:flex;gap:9px;flex-wrap:wrap}
-.actions button{flex:1;min-width:120px}
-
-.article-set{
- display:flex;
- justify-content:space-between;
- padding:13px;
- border-bottom:1px solid var(--border);
-}
-
-.article-set:nth-child(even){background:#f8fbf9}
-.article-set strong{color:var(--green)}
-
-footer{
- text-align:center;
- padding:20px;
- color:#8b9b91;
- font-size:12px;
-}
-
 @media(max-width:650px){
- body{padding:9px}
- header{padding:23px 17px}
- header h1{font-size:22px}
- .card{padding:15px}
- .grid{grid-template-columns:1fr}
- .formgrid{grid-template-columns:1fr;gap:0}
- .part-grid{grid-template-columns:repeat(2,1fr)}
- .setbox strong{font-size:29px}
+ .sidebar{width:75px;padding:15px 8px}
+ .logo{padding:8px 0 20px;text-align:center}
+ .logo h2{font-size:12px}
+ .logo small,.menu-title,.nav span{display:none}
+ .nav{justify-content:center;padding:13px 5px;font-size:20px}
+ .main{margin-left:75px;width:calc(100% - 75px);padding:12px}
+ .topbar h1{font-size:19px}
+ .topbar p{font-size:11px}
+ .top-actions button{padding:8px}
+ .stats{gap:9px}
+ .stat{padding:12px}
+ .stat h2{font-size:20px}
+ .stat small{font-size:11px}
+ .card{padding:14px}
+ .grid3{grid-template-columns:1fr 1fr}
+ .part-data{grid-template-columns:1fr 1fr}
 }
 </style>
 </head>
 
 <body>
+<div class="app">
 
-<div class="container">
+<aside class="sidebar">
+ <div class="logo">
+  <h2>🏭 SMART ERP</h2>
+  <small>Bag Manufacturing System</small>
+ </div>
 
-<header>
-<h1>📊 Production Management</h1>
-<p>Premium Article Wise Production & Material Tracking System</p>
-</header>
+ <div class="menu-title">MAIN MENU</div>
+ <button class="nav active" data-page="dashboard">📊 <span>Dashboard</span></button>
+ <button class="nav" data-page="input">📥 <span>মাল ইনপুট</span></button>
+ <button class="nav" data-page="output">📤 <span>মাল আউটপুট</span></button>
+ <button class="nav" data-page="stock">📦 <span>বর্তমান স্টক</span></button>
 
-<div class="card">
-<h2>📦 Article নির্বাচন করুন</h2>
-<select id="articleSelect" onchange="changeArticle()"></select>
+ <div class="menu-title">MANAGEMENT</div>
+ <button class="nav" data-page="target">🎯 <span>মাসিক টার্গেট</span></button>
+ <button class="nav" data-page="sets">🧩 <span>সেট হিসাব</span></button>
+ <button class="nav" data-page="history">📋 <span>হিসাবের ইতিহাস</span></button>
+ <button class="nav" data-page="reports">📈 <span>রিপোর্ট</span></button>
+
+ <div class="menu-title">SYSTEM</div>
+ <button class="nav" data-page="backup">💾 <span>Backup & Data</span></button>
+</aside>
+
+<main class="main">
+
+<div class="topbar">
+ <div>
+  <h1 id="pageTitle">Dashboard</h1>
+  <p>Bag Manufacturing Management System</p>
+ </div>
+ <div class="top-actions">
+  <button class="icon-btn" onclick="toggleTheme()">🌙</button>
+  <button class="icon-btn" onclick="location.reload()">↻</button>
+ </div>
 </div>
 
-<div class="card">
-<h2>🧮 Article-এর মোট হিসাব</h2>
+<!-- DASHBOARD -->
+<section class="page active" id="dashboard">
 
-<div class="setbox">
-<small>সর্বনিম্ন Part অনুযায়ী তৈরি করা সম্ভব মোট সেট</small>
-<strong id="setCount">0 সেট</strong>
-<div class="lowest" id="lowestPart"></div>
-</div>
+ <div class="card">
+  <div class="grid3">
+   <div class="field">
+    <label>আর্টিকেল নির্বাচন</label>
+    <select id="dashArticle"></select>
+   </div>
+   <div class="field">
+    <label>হিসাবের মাস</label>
+    <input type="month" id="dashMonth">
+   </div>
+   <div class="field">
+    <label>আজকের তারিখ</label>
+    <input type="date" id="dashDate" readonly>
+   </div>
+  </div>
+ </div>
 
-<div class="grid">
-<div class="stat">
-<small>মোট Target</small>
-<strong id="totalTarget">0</strong>
-</div>
+ <div class="stats">
+  <div class="stat blue"><span class="ico">🎯</span><small>মাসিক টার্গেট</small><h2 id="dTarget">0</h2></div>
+  <div class="stat green"><span class="ico">📥</span><small>মাসিক ইনপুট</small><h2 id="dInput">0</h2></div>
+  <div class="stat red"><span class="ico">📤</span><small>মাসিক আউটপুট</small><h2 id="dOutput">0</h2></div>
+  <div class="stat orange"><span class="ico">📦</span><small>বর্তমান স্টক</small><h2 id="dStock">0</h2></div>
+ </div>
 
-<div class="stat">
-<small>মোট Production</small>
-<strong id="totalProduction">0</strong>
-</div>
+ <div class="grid2">
+  <div class="card">
+   <h3 class="card-title">📊 ইনপুট বনাম আউটপুট</h3>
+   <canvas id="mainChart" height="220"></canvas>
+  </div>
+  <div class="card">
+   <h3 class="card-title">🎯 মাসিক টার্গেট অগ্রগতি</h3>
+   <div id="dashProgress"></div>
+  </div>
+ </div>
 
-<div class="stat">
-<small>মোট বাকি</small>
-<strong id="totalPending">0</strong>
-</div>
-</div>
-</div>
+ <div class="card">
+  <h3 class="card-title">📦 পার্ট অনুযায়ী স্টক</h3>
+  <div id="dashParts"></div>
+ </div>
+</section>
 
-<div class="card">
-<h2>📋 প্রতিটি Part-এর বিস্তারিত হিসাব</h2>
-<div id="partSummary"></div>
+<!-- INPUT -->
+<section class="page" id="input">
+ <div class="card">
+  <h3 class="card-title">📥 নতুন মাল ইনপুট</h3>
+  <div class="grid3">
+   <div class="field"><label>আর্টিকেল</label><select id="inArticle"></select></div>
+   <div class="field"><label>পার্ট</label><select id="inPart"></select></div>
+   <div class="field"><label>তারিখ</label><input type="date" id="inDate"></div>
+   <div class="field"><label>পরিমাণ (পিস)</label><input type="number" id="inQty" min="1" placeholder="যেমন 500"></div>
+   <div class="field"><label>মাল কোথা থেকে এসেছে</label><input id="inSource" placeholder="সোর্স / বিভাগ"></div>
+   <div class="field"><label>নোট</label><input id="inNote" placeholder="ঐচ্ছিক"></div>
+  </div>
+  <div class="actions">
+   <button class="btn btn-green" onclick="addEntry('in')">+ ইনপুট সংরক্ষণ</button>
+   <button class="btn btn-light" onclick="clearEntry('in')">পরিষ্কার</button>
+  </div>
+ </div>
+ <div class="card">
+  <h3 class="card-title">📥 সাম্প্রতিক ইনপুট</h3>
+  <div class="table-wrap"><table>
+   <thead><tr><th>তারিখ</th><th>আর্টিকেল</th><th>পার্ট</th><th>পরিমাণ</th><th>সোর্স</th><th>অ্যাকশন</th></tr></thead>
+   <tbody id="recentIn"></tbody>
+  </table></div>
+ </div>
+</section>
 
-<p class="note">
-প্রতিটি Part-এর সেট সংখ্যা তার মোট মাল গ্রহণের পরিমাণ অনুযায়ী দেখানো হবে।
-যে Part-এর পরিমাণ সবচেয়ে কম, সেটি লাল রঙে চিহ্নিত হবে।
-</p>
-</div>
+<!-- OUTPUT -->
+<section class="page" id="output">
+ <div class="card">
+  <h3 class="card-title">📤 নতুন মাল আউটপুট</h3>
+  <div class="grid3">
+   <div class="field"><label>আর্টিকেল</label><select id="outArticle"></select></div>
+   <div class="field"><label>পার্ট</label><select id="outPart"></select></div>
+   <div class="field"><label>তারিখ</label><input type="date" id="outDate"></div>
+   <div class="field"><label>পরিমাণ (পিস)</label><input type="number" id="outQty" min="1" placeholder="যেমন 300"></div>
+   <div class="field"><label>কোথায় / কাকে দেওয়া হয়েছে</label><input id="outDestination" placeholder="বিভাগ / কর্মী"></div>
+   <div class="field"><label>নোট</label><input id="outNote" placeholder="ঐচ্ছিক"></div>
+  </div>
+  <div class="actions">
+   <button class="btn btn-primary" onclick="addEntry('out')">+ আউটপুট সংরক্ষণ</button>
+   <button class="btn btn-light" onclick="clearEntry('out')">পরিষ্কার</button>
+  </div>
+  <p class="muted" style="font-size:12px">স্টকের চেয়ে বেশি পরিমাণ আউটপুট দেওয়া যাবে না।</p>
+ </div>
+ <div class="card">
+  <h3 class="card-title">📤 সাম্প্রতিক আউটপুট</h3>
+  <div class="table-wrap"><table>
+   <thead><tr><th>তারিখ</th><th>আর্টিকেল</th><th>পার্ট</th><th>পরিমাণ</th><th>প্রাপক</th><th>অ্যাকশন</th></tr></thead>
+   <tbody id="recentOut"></tbody>
+  </table></div>
+ </div>
+</section>
 
-<div class="card">
-<h2>📥 নতুন মাল গ্রহণ করুন</h2>
+<!-- STOCK -->
+<section class="page" id="stock">
+ <div class="card">
+  <h3 class="card-title">📦 বর্তমান স্টক রিপোর্ট</h3>
+  <div class="field"><label>আর্টিকেল নির্বাচন</label><select id="stockArticle"></select></div>
+  <div class="table-wrap"><table>
+   <thead><tr><th>পার্ট</th><th>মোট ইনপুট</th><th>মোট আউটপুট</th><th>বর্তমান স্টক</th></tr></thead>
+   <tbody id="stockBody"></tbody>
+  </table></div>
+ </div>
+</section>
 
-<div class="formgrid">
+<!-- TARGET -->
+<section class="page" id="target">
+ <div class="card">
+  <h3 class="card-title">🎯 মাসিক টার্গেট সেট করুন</h3>
+  <div class="grid3">
+   <div class="field"><label>মাস</label><input type="month" id="targetMonth"></div>
+   <div class="field"><label>আর্টিকেল</label><select id="targetArticle"></select></div>
+   <div class="field"><label>পার্ট</label><select id="targetPart"></select></div>
+   <div class="field"><label>টার্গেট (পিস)</label><input type="number" id="targetQty" min="0"></div>
+  </div>
+  <button class="btn btn-primary" onclick="saveTarget()">টার্গেট সংরক্ষণ</button>
+ </div>
+ <div class="card">
+  <h3 class="card-title">📋 নির্বাচিত মাসের টার্গেট</h3>
+  <div class="grid3">
+   <div class="field"><label>মাস</label><input type="month" id="targetViewMonth"></div>
+   <div class="field"><label>আর্টিকেল</label><select id="targetViewArticle"></select></div>
+  </div>
+  <button class="btn btn-light" onclick="renderTargetTable()">দেখুন</button>
+  <div id="targetTable" style="margin-top:15px"></div>
+ </div>
+</section>
 
-<div class="field">
-<label>তারিখ</label>
-<input type="date" id="receiveDate">
-</div>
+<!-- SETS -->
+<section class="page" id="sets">
+ <div class="card">
+  <h3 class="card-title">🧩 স্মার্ট সেট ক্যালকুলেশন</h3>
+  <div class="field"><label>আর্টিকেল</label><select id="setArticle"></select></div>
+  <div id="setResult"></div>
+ </div>
+</section>
 
-<div class="field">
-<label>Article</label>
-<select id="receiveArticle"></select>
-</div>
+<!-- HISTORY -->
+<section class="page" id="history">
+ <div class="card">
+  <h3 class="card-title">📋 সম্পূর্ণ হিসাবের ইতিহাস</h3>
+  <div class="grid3">
+   <div class="field"><label>ধরন</label>
+    <select id="histType"><option value="all">সব</option><option value="in">ইনপুট</option><option value="out">আউটপুট</option></select>
+   </div>
+   <div class="field"><label>আর্টিকেল</label><select id="histArticle"></select></div>
+   <div class="field"><label>মাস</label><input type="month" id="histMonth"></div>
+  </div>
+  <button class="btn btn-light" onclick="renderHistory()">ফিল্টার করুন</button>
+  <div class="table-wrap" style="margin-top:15px">
+   <table>
+    <thead><tr><th>তারিখ</th><th>ধরন</th><th>আর্টিকেল</th><th>পার্ট</th><th>পরিমাণ</th><th>বিবরণ</th><th>অ্যাকশন</th></tr></thead>
+    <tbody id="historyBody"></tbody>
+   </table>
+  </div>
+ </div>
+</section>
 
-<div class="field">
-<label>Part</label>
-<select id="receivePart"></select>
-</div>
+<!-- REPORTS -->
+<section class="page" id="reports">
+ <div class="card">
+  <h3 class="card-title">📈 মাসিক রিপোর্ট</h3>
+  <div class="grid3">
+   <div class="field"><label>মাস</label><input type="month" id="reportMonth"></div>
+   <div class="field"><label>আর্টিকেল</label><select id="reportArticle"></select></div>
+  </div>
+  <button class="btn btn-primary" onclick="renderReport()">রিপোর্ট তৈরি</button>
+  <div id="reportResult" style="margin-top:15px"></div>
+  <div class="actions"><button class="btn btn-green" onclick="exportCSV()">CSV ডাউনলোড</button></div>
+ </div>
+</section>
 
-<div class="field">
-<label>মাল নিয়েছি (Quantity)</label>
-<input type="number" id="receiveQty" min="1" placeholder="পরিমাণ লিখুন">
-</div>
+<!-- BACKUP -->
+<section class="page" id="backup">
+ <div class="card">
+  <h3 class="card-title">💾 Backup & Data Management</h3>
+  <p class="muted">আপনার সব ইনপুট, আউটপুট ও টার্গেটের ডাটা ব্যাকআপ রাখুন।</p>
+  <div class="actions">
+   <button class="btn btn-green" onclick="backupJSON()">⬇ JSON Backup</button>
+   <button class="btn btn-primary" onclick="exportCSV()">⬇ CSV Export</button>
+   <label class="btn btn-light" style="display:inline-block">
+    📂 Restore Backup
+    <input type="file" id="restoreFile" accept=".json" hidden onchange="restoreJSON(event)">
+   </label>
+  </div>
+  <hr style="border:0;border-top:1px solid var(--border);margin:20px 0">
+  <h3>ডাটা সংরক্ষণ</h3>
+  <p class="muted">ডাটা এই ব্রাউজারের Local Storage-এ সেভ হয়। অন্য ডিভাইসে নিতে ব্যাকআপ Restore করতে হবে।</p>
+  <button class="btn btn-red" onclick="resetAll()">সব ডাটা মুছে ফেলুন</button>
+ </div>
+</section>
 
-</div>
-
-<button class="primary" onclick="addReceived()">+ মাল গ্রহণ যোগ করুন</button>
-</div>
-
-<div class="card">
-<h2>🏭 নতুন Production যোগ করুন</h2>
-
-<div class="formgrid">
-
-<div class="field">
-<label>তারিখ</label>
-<input type="date" id="productionDate">
-</div>
-
-<div class="field">
-<label>Article</label>
-<select id="productionArticle"></select>
-</div>
-
-<div class="field">
-<label>Part</label>
-<select id="productionPart"></select>
-</div>
-
-<div class="field">
-<label>Production Quantity</label>
-<input type="number" id="productionQty" min="1" placeholder="পরিমাণ লিখুন">
-</div>
-
-</div>
-
-<button class="primary" onclick="addProduction()">+ Production যোগ করুন</button>
-</div>
-
-<div class="card">
-<h2>🎯 Target পরিবর্তন করুন</h2>
-<div id="targetSettings"></div>
-<button class="primary" onclick="saveTargets()">Target Save করুন</button>
-</div>
-
-<div class="card">
-<h2>📚 হিসাবের History</h2>
-
-<div class="field">
-<label>হিসাবের ধরন</label>
-<select id="historyType" onchange="renderHistory()">
-<option value="received">মাল গ্রহণ</option>
-<option value="production">Production</option>
-</select>
-</div>
-
-<div class="field">
-<label>Article Filter</label>
-<select id="historyArticle" onchange="renderHistory()"></select>
-</div>
-
-<div class="tablewrap">
-<table>
-<thead>
-<tr>
-<th>তারিখ</th>
-<th>Article</th>
-<th>Part</th>
-<th>Quantity</th>
-<th>Action</th>
-</tr>
-</thead>
-<tbody id="historyBody"></tbody>
-</table>
-</div>
-</div>
-
-<div class="card">
-<h2>📊 সব Article-এর সেট হিসাব</h2>
-<div id="allArticleSets"></div>
-</div>
-
-<div class="card">
-<h2>💾 Backup & Report</h2>
-<div class="actions">
-<button class="secondary" onclick="downloadCSV()">📥 CSV Report</button>
-<button class="secondary" onclick="backupData()">💾 Backup Download</button>
-<button class="secondary" onclick="document.getElementById('restoreFile').click()">📂 Backup Restore</button>
-<input type="file" id="restoreFile" accept=".json" style="display:none" onchange="restoreData(event)">
-</div>
-</div>
-
-<footer>Premium Production Management System</footer>
-
+</main>
 </div>
 
 <script>
+const ARTICLES=["Olive","Tan","Black","Navy Blue","Maroon","Chocolate","Grey","Royal Blue","Coffee","Ash","Khaki","Beige"];
+const PARTS=["Backpart","Front zipar part","R","L","Top part"];
+const KEY="SMART_ERP_BAG_V1";
 
-// সব Article
-
-const articles=[
-"Olive",
-"Tan",
-"Black",
-"Navy Blue",
-"Maroon",
-"Chocolate",
-"Grey",
-"Royal Blue",
-"Coffee",
-"Ash",
-"Khaki",
-"Beige"
-];
-
-// সব Part
-
-const parts=[
-"Backpart",
-"Front zipar part",
-"R",
-"L",
-"Top part"
-];
-
-// আগের Target
-
-const oldTargets={
-Olive:{
-"Backpart":13635,
-"Front zipar part":13980,
-"R":14700,
-"L":15172,
-"Top part":15855
-},
-Tan:{
-"Backpart":21693,
-"Front zipar part":21185,
-"R":21590,
-"L":21130,
-"Top part":21131
-}
+const DEFAULT={
+ Olive:{"Backpart":13635,"Front zipar part":13980,"R":14700,"L":15172,"Top part":15855},
+ Tan:{"Backpart":21693,"Front zipar part":21185,"R":21590,"L":21130,"Top part":21131}
 };
 
-// ডেটা লোড
+let db=load();
+let chart=null;
 
-function readJSON(key,fallback){
-try{
-return JSON.parse(localStorage.getItem(key)) ?? fallback;
-}catch(e){
-return fallback;
+function load(){
+ try{
+  let x=JSON.parse(localStorage.getItem(KEY));
+  if(x&&Array.isArray(x.entries)&&x.targets)return x;
+ }catch(e){}
+ return {entries:[],targets:{},theme:"light"};
 }
+function save(){localStorage.setItem(KEY,JSON.stringify(db))}
+function today(){return new Date().toLocaleDateString("en-CA")}
+function monthNow(){return today().slice(0,7)}
+function fmt(n){return Number(n||0).toLocaleString("en-US")}
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function targetKey(m,a,p){return [m,a,p].join("|")}
+function getTarget(m,a,p){
+ let k=targetKey(m,a,p);
+ if(db.targets[k]!==undefined)return Number(db.targets[k])||0;
+ if(m==="2026-11"&&DEFAULT[a]?.[p])return DEFAULT[a][p];
+ return 0;
 }
-
-let production=readJSON("productionEntries",[]).map(x=>({
-...x,
-article:x.article||x.color||"Olive"
-}));
-
-let received=readJSON("receivedEntries",[]).map(x=>({
-...x,
-article:x.article||x.color||"Olive"
-}));
-
-let savedTargets=readJSON("productionTargets",null);
-
-let targets={};
-
-articles.forEach(a=>{
-targets[a]={};
-
-parts.forEach(p=>{
-targets[a][p]=Number(
-(savedTargets && savedTargets[a] && savedTargets[a][p])
-??
-(oldTargets[a] && oldTargets[a][p])
-??
-0
-);
-});
-});
-
-let currentArticle="Olive";
-
-// তারিখ
-
-function today(){
-let d=new Date();
-return d.getFullYear()+"-"+
-String(d.getMonth()+1).padStart(2,"0")+"-"+
-String(d.getDate()).padStart(2,"0");
+function total(a,p,type,month=null){
+ return db.entries.filter(e=>e.article===a&&e.part===p&&e.type===type&&(!month||e.date.slice(0,7)===month)).reduce((s,e)=>s+Number(e.qty),0);
 }
+function stock(a,p){return total(a,p,"in")-total(a,p,"out")}
 
-// Options
-
-function options(){
-return articles.map(a=>`<option value="${a}">${a}</option>`).join("");
+function fillSelect(id,items){
+ document.getElementById(id).innerHTML=items.map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");
 }
+function setup(){
+ ["dashArticle","inArticle","outArticle","stockArticle","targetArticle","targetViewArticle","setArticle","histArticle","reportArticle"].forEach(id=>fillSelect(id,ARTICLES));
+ ["inPart","outPart","targetPart"].forEach(id=>fillSelect(id,PARTS));
 
-function partOptions(){
-return parts.map(p=>`<option value="${p}">${p}</option>`).join("");
+ ["dashMonth","targetMonth","targetViewMonth","histMonth","reportMonth"].forEach(id=>document.getElementById(id).value=monthNow());
+ document.getElementById("dashDate").value=today();
+ document.getElementById("inDate").value=today();
+ document.getElementById("outDate").value=today();
+
+ document.querySelectorAll(".nav").forEach(b=>b.addEventListener("click",()=>showPage(b.dataset.page,b)));
+ document.getElementById("dashArticle").onchange=renderDashboard;
+ document.getElementById("dashMonth").onchange=renderDashboard;
+ document.getElementById("stockArticle").onchange=renderStock;
+ document.getElementById("setArticle").onchange=renderSets;
+ document.getElementById("targetViewMonth").onchange=renderTargetTable;
+ document.getElementById("targetViewArticle").onchange=renderTargetTable;
+
+ if(db.theme==="dark")document.body.classList.add("dark");
+ renderAll();
 }
-
-// শুরু
-
-function init(){
-
-document.getElementById("articleSelect").innerHTML=options();
-document.getElementById("receiveArticle").innerHTML=options();
-document.getElementById("productionArticle").innerHTML=options();
-
-document.getElementById("historyArticle").innerHTML=
-'<option value="All">সব Article</option>'+options();
-
-document.getElementById("receivePart").innerHTML=partOptions();
-document.getElementById("productionPart").innerHTML=partOptions();
-
-document.getElementById("receiveDate").value=today();
-document.getElementById("productionDate").value=today();
-
-document.getElementById("articleSelect").value="Olive";
-document.getElementById("receiveArticle").value="Olive";
-document.getElementById("productionArticle").value="Olive";
-
-renderAll();
+function showPage(id,btn){
+ document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+ document.getElementById(id).classList.add("active");
+ document.querySelectorAll(".nav").forEach(n=>n.classList.remove("active"));
+ btn.classList.add("active");
+ const titles={dashboard:"Dashboard",input:"মাল ইনপুট",output:"মাল আউটপুট",stock:"বর্তমান স্টক",target:"মাসিক টার্গেট",sets:"সেট হিসাব",history:"হিসাবের ইতিহাস",reports:"রিপোর্ট",backup:"Backup & Data"};
+ document.getElementById("pageTitle").textContent=titles[id];
+ renderAll();
 }
-
-// Save
-
-function save(){
-
-localStorage.setItem("productionEntries",JSON.stringify(production));
-localStorage.setItem("receivedEntries",JSON.stringify(received));
-localStorage.setItem("productionTargets",JSON.stringify(targets));
-
+function toggleTheme(){
+ document.body.classList.toggle("dark");
+ db.theme=document.body.classList.contains("dark")?"dark":"light";
+ save();
 }
-
-// Article পরিবর্তন
-
-function changeArticle(){
-
-currentArticle=document.getElementById("articleSelect").value;
-
-renderAll();
-
-}
-
-// মাল গ্রহণের মোট হিসাব
-
-function sumReceived(article,part){
-
-return received
-.filter(x=>x.article===article && x.part===part)
-.reduce((sum,x)=>sum+Number(x.quantity),0);
-
-}
-
-// Production-এর মোট হিসাব
-
-function sumProduction(article,part){
-
-return production
-.filter(x=>x.article===article && x.part===part)
-.reduce((sum,x)=>sum+Number(x.quantity),0);
-
-}
-
-// প্রতিটি Part-এর সেট ও সর্বনিম্ন সেট
-
-function getSetInfo(article){
-
-let list=parts.map(part=>({
-part:part,
-qty:sumReceived(article,part)
-}));
-
-let minimum=Math.min(...list.map(x=>x.qty));
-
-return{
-list,
-minimum,
-lowestParts:list.filter(x=>x.qty===minimum)
-};
-
-}
-
-// মাল গ্রহণ যোগ
-
-function addReceived(){
-
-let date=document.getElementById("receiveDate").value;
-let article=document.getElementById("receiveArticle").value;
-let part=document.getElementById("receivePart").value;
-let qty=Number(document.getElementById("receiveQty").value);
-
-if(!date || !Number.isFinite(qty) || qty<=0){
-alert("সঠিক তারিখ ও Quantity দিন");
-return;
-}
-
-received.push({
-id:Date.now()+Math.random(),
-date,
-article,
-part,
-quantity:qty
-});
-
-save();
-
-currentArticle=article;
-document.getElementById("articleSelect").value=article;
-document.getElementById("receiveQty").value="";
-
-renderAll();
-
-alert("মাল গ্রহণের হিসাব যোগ হয়েছে!");
-
-}
-
-// Production যোগ
-
-function addProduction(){
-
-let date=document.getElementById("productionDate").value;
-let article=document.getElementById("productionArticle").value;
-let part=document.getElementById("productionPart").value;
-let qty=Number(document.getElementById("productionQty").value);
-
-if(!date || !Number.isFinite(qty) || qty<=0){
-alert("সঠিক তারিখ ও Quantity দিন");
-return;
-}
-
-production.push({
-id:Date.now()+Math.random(),
-date,
-article,
-part,
-quantity:qty
-});
-
-save();
-
-currentArticle=article;
-document.getElementById("articleSelect").value=article;
-document.getElementById("productionQty").value="";
-
-renderAll();
-
-alert("Production যোগ হয়েছে!");
-
-}
-
-// Summary
-
-function renderSummary(){
-
-let totalTarget=0;
-let totalProduction=0;
-
-parts.forEach(part=>{
-totalTarget+=Number(targets[currentArticle][part]||0);
-totalProduction+=sumProduction(currentArticle,part);
-});
-
-document.getElementById("totalTarget").textContent=
-totalTarget.toLocaleString();
-
-document.getElementById("totalProduction").textContent=
-totalProduction.toLocaleString();
-
-document.getElementById("totalPending").textContent=
-Math.max(0,totalTarget-totalProduction).toLocaleString();
-
-let info=getSetInfo(currentArticle);
-
-document.getElementById("setCount").textContent=
-info.minimum.toLocaleString()+" সেট";
-
-let lowestNames=info.lowestParts.map(x=>x.part).join(", ");
-
-document.getElementById("lowestPart").textContent=
-"সর্বনিম্ন Part: "+lowestNames+
-" — "+info.minimum.toLocaleString()+" সেট";
-
-}
-
-// প্রতিটি Part-এর হিসাব
-
-function renderParts(){
-
-let html="";
-
-let info=getSetInfo(currentArticle);
-
-parts.forEach(part=>{
-
-let target=Number(targets[currentArticle][part]||0);
-
-let made=sumProduction(currentArticle,part);
-
-let receivedQty=sumReceived(currentArticle,part);
-
-let pending=Math.max(0,target-made);
-
-let percent=target?
-Math.min(100,made/target*100):0;
-
-let isMinimum=receivedQty===info.minimum;
-
-html+=`
-
-<div class="part-row ${isMinimum?'minimum-row':''}">
-
-<div class="part-head">
-
-<span class="part-name">${part}</span>
-
-${isMinimum
-?'<span class="minimum-badge">🔴 সর্বনিম্ন সেট</span>'
-:'<span class="badge">সেট: '+receivedQty.toLocaleString()+'</span>'}
-
-</div>
-
-<div class="part-grid">
-
-<div class="part-box">
-<small>মোট মাল নিয়েছি</small>
-<strong>${receivedQty.toLocaleString()}</strong>
-</div>
-
-<div class="part-box">
-<small>এই Part-এর সেট</small>
-<strong class="set-value">${receivedQty.toLocaleString()}</strong>
-</div>
-
-<div class="part-box">
-<small>Production</small>
-<strong>${made.toLocaleString()}</strong>
-</div>
-
-<div class="part-box">
-<small>Target / বাকি</small>
-<strong>${target.toLocaleString()} / ${pending.toLocaleString()}</strong>
-</div>
-
-</div>
-
-<div class="progress">
-<div style="width:${percent}%"></div>
-</div>
-
-</div>
-
-`;
-
-});
-
-document.getElementById("partSummary").innerHTML=html;
-
-}
-
-// Target Settings
-
-function renderTargets(){
-
-document.getElementById("targetSettings").innerHTML=
-parts.map(part=>`
-
-<div class="field">
-
-<label>${part} Target</label>
-
-<input
-type="number"
-min="0"
-id="target_${part}"
-value="${targets[currentArticle][part]}"
->
-
-</div>
-
-`).join("");
-
-}
-
-// Target Save
-
-function saveTargets(){
-
-let next={};
-
-for(let part of parts){
-
-let value=document.getElementById("target_"+part).value;
-
-let number=Number(value);
-
-if(value.trim()==="" || !Number.isFinite(number) || number<0){
-alert(part+" এর সঠিক Target দিন");
-return;
-}
-
-next[part]=number;
-
-}
-
-targets[currentArticle]=next;
-
-save();
-renderAll();
-
-alert("Target Save হয়েছে!");
-
-}
-
-// History
-
-function renderHistory(){
-
-let type=document.getElementById("historyType").value;
-let filter=document.getElementById("historyArticle").value;
-
-let arr=(type==="received"?received:production)
-.filter(x=>filter==="All"||x.article===filter)
-.slice()
-.sort((a,b)=>b.date.localeCompare(a.date));
-
-document.getElementById("historyBody").innerHTML=
-arr.length
-?arr.map(x=>`
-
-<tr>
-<td>${x.date}</td>
-<td>${x.article}</td>
-<td>${x.part}</td>
-<td>${Number(x.quantity).toLocaleString()}</td>
-<td>
-<button class="danger" onclick="deleteEntry('${type}','${x.id}')">
-Delete
-</button>
-</td>
-</tr>
-
-`).join("")
-:'<tr><td colspan="5">কোনো হিসাব নেই</td></tr>';
-
-}
-
-// Delete
-
-function deleteEntry(type,id){
-
-if(!confirm("এই হিসাবটি মুছে ফেলবেন?"))return;
-
-if(type==="received"){
-received=received.filter(x=>String(x.id)!==String(id));
-}else{
-production=production.filter(x=>String(x.id)!==String(id));
-}
-
-save();
-renderAll();
-
-}
-
-// সব Article-এর সেট
-
-function renderAllArticleSets(){
-
-document.getElementById("allArticleSets").innerHTML=
-articles.map(article=>{
-
-let info=getSetInfo(article);
-
-let lowest=info.lowestParts.map(x=>x.part).join(", ");
-
-return`
-
-<div class="article-set">
-
-<span>${article}</span>
-
-<strong>
-${info.minimum.toLocaleString()} সেট
-</strong>
-
-</div>
-
-`;
-
-}).join("");
-
-}
-
-// সব Refresh
-
 function renderAll(){
-
-renderSummary();
-renderParts();
-renderTargets();
-renderHistory();
-renderAllArticleSets();
-
+ renderDashboard();renderRecent("in");renderRecent("out");
+ renderStock();renderTargetTable();renderSets();renderHistory();
 }
+function renderDashboard(){
+ let a=document.getElementById("dashArticle").value;
+ let m=document.getElementById("dashMonth").value||monthNow();
+ let t=0,i=0,o=0,s=0;
+ PARTS.forEach(p=>{
+  t+=getTarget(m,a,p);i+=total(a,p,"in",m);
+  o+=total(a,p,"out",m);s+=stock(a,p);
+ });
+ dTarget.textContent=fmt(t);dInput.textContent=fmt(i);
+ dOutput.textContent=fmt(o);dStock.textContent=fmt(s);
 
-// CSV Report
-
-function downloadCSV(){
-
-let rows=[
-["Type","Date","Article","Part","Quantity"]
-];
-
-received.forEach(x=>{
-rows.push(["Material Received",x.date,x.article,x.part,x.quantity]);
-});
-
-production.forEach(x=>{
-rows.push(["Production",x.date,x.article,x.part,x.quantity]);
-});
-
-let csv="\uFEFF"+rows.map(row=>
-row.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(",")
-).join("\n");
-
-let blob=new Blob([csv],{type:"text/csv;charset=utf-8"});
-
-let url=URL.createObjectURL(blob);
-
-let a=document.createElement("a");
-a.href=url;
-a.download="production-report.csv";
-a.click();
-
-URL.revokeObjectURL(url);
-
+ let html="";
+ PARTS.forEach(p=>{
+  let target=getTarget(m,a,p),got=total(a,p,"in",m);
+  let pct=target?Math.min(100,got/target*100):0;
+  html+=`<div style="margin:14px 0">
+   <div style="display:flex;justify-content:space-between"><b>${p}</b><small>${fmt(got)} / ${fmt(target)}</small></div>
+   <div class="progress"><span style="width:${pct}%"></span></div>
+   <small class="muted">বাকি: ${fmt(target-got)} | ${pct.toFixed(1)}%</small>
+  </div>`;
+ });
+ dashProgress.innerHTML=html;
+ let ph="";
+ PARTS.forEach(p=>ph+=`<div class="part"><h3>${p}</h3><div class="part-data">
+ <div><small>ইনপুট</small><strong>${fmt(total(a,p,"in"))}</strong></div>
+ <div><small>আউটপুট</small><strong>${fmt(total(a,p,"out"))}</strong></div>
+ <div><small>স্টক</small><strong>${fmt(stock(a,p))}</strong></div>
+ </div></div>`);
+ dashParts.innerHTML=ph;
+ drawChart(a,m);
 }
-
-// Backup
-
-function backupData(){
-
-let data={
-production,
-received,
-targets
-};
-
-let blob=new Blob(
-[JSON.stringify(data,null,2)],
-{type:"application/json"}
-);
-
-let url=URL.createObjectURL(blob);
-
-let a=document.createElement("a");
-a.href=url;
-a.download="production-backup.json";
-a.click();
-
-URL.revokeObjectURL(url);
-
+function drawChart(a,m){
+ if(!window.Chart)return;
+ let labels=PARTS;
+ let ins=PARTS.map(p=>total(a,p,"in",m));
+ let outs=PARTS.map(p=>total(a,p,"out",m));
+ if(chart)chart.destroy();
+ chart=new Chart(document.getElementById("mainChart"),{
+  type:"bar",
+  data:{labels,datasets:[
+   {label:"ইনপুট",data:ins,backgroundColor:"#0caa79",borderRadius:5},
+   {label:"আউটপুট",data:outs,backgroundColor:"#e34f64",borderRadius:5}
+  ]},
+  options:{responsive:true,plugins:{legend:{position:"bottom"}},scales:{y:{beginAtZero:true}}}
+ });
 }
+function addEntry(type){
+ let prefix=type==="in"?"in":"out";
+ let a=document.getElementById(prefix+"Article").value;
+ let p=document.getElementById(prefix+"Part").value;
+ let date=document.getElementById(prefix+"Date").value;
+ let qty=Number(document.getElementById(prefix+"Qty").value);
+ let detail=type==="in"?document.getElementById("inSource").value:document.getElementById("outDestination").value;
+ let note=document.getElementById(prefix+"Note").value;
 
-// Restore
-
-function restoreData(event){
-
-let file=event.target.files[0];
-
-if(!file)return;
-
-let reader=new FileReader();
-
-reader.onload=e=>{
-
-try{
-
-let data=JSON.parse(e.target.result);
-
-if(!Array.isArray(data.production)||
-!Array.isArray(data.received)||
-!data.targets){
-throw Error();
+ if(!date||!Number.isFinite(qty)||qty<=0){alert("সঠিক তারিখ ও পরিমাণ দিন");return}
+ if(type==="out"&&qty>stock(a,p)){
+  alert("পর্যাপ্ত স্টক নেই! বর্তমান স্টক: "+fmt(stock(a,p)));
+  return;
+ }
+ db.entries.push({
+  id:Date.now().toString(36)+Math.random().toString(36).slice(2),
+  type,article:a,part:p,date,qty,detail,note
+ });
+ save();
+ document.getElementById(prefix+"Qty").value="";
+ document.getElementById(prefix+"Note").value="";
+ document.getElementById(prefix==="in"?"inSource":"outDestination").value="";
+ renderAll();
+ alert(type==="in"?"ইনপুট সফলভাবে সংরক্ষিত হয়েছে":"আউটপুট সফলভাবে সংরক্ষিত হয়েছে");
 }
-
-production=data.production.map(x=>({
-...x,
-article:x.article||x.color||"Olive"
-}));
-
-received=data.received.map(x=>({
-...x,
-article:x.article||x.color||"Olive"
-}));
-
-targets=data.targets;
-
-articles.forEach(a=>{
-
-if(!targets[a])targets[a]={};
-
-parts.forEach(p=>{
-targets[a][p]=Number(targets[a][p]||0);
-});
-
-});
-
-save();
-renderAll();
-
-alert("Backup সফলভাবে Restore হয়েছে!");
-
-}catch(error){
-
-alert("Backup ফাইলটি সঠিক নয়!");
-
+function clearEntry(prefix){
+ ["Qty","Note"].forEach(s=>document.getElementById(prefix+s).value="");
+ if(prefix==="in")inSource.value="";else outDestination.value="";
+ document.getElementById(prefix+"Date").value=today();
 }
-
-event.target.value="";
-
-};
-
-reader.readAsText(file);
-
+function renderRecent(type){
+ let list=db.entries.filter(e=>e.type===type).sort((a,b)=>b.date.localeCompare(a.date)).slice(0,10);
+ let id=type==="in"?"recentIn":"recentOut";
+ document.getElementById(id).innerHTML=list.length?list.map(e=>`
+ <tr><td>${e.date}</td><td>${e.article}</td><td>${e.part}</td><td>${fmt(e.qty)}</td><td>${esc(e.detail)}</td><td><button class="btn btn-light" onclick="editEntry('${e.id}')">এডিট</button> <button class="btn btn-red" onclick="deleteEntry('${e.id}')">ডিলিট</button></td></tr>`).join(""):`<tr><td colspan="6" class="empty">কোনো তথ্য নেই</td></tr>`;
 }
-
-// Start
-
-init();
-
+function renderStock(){
+ let a=stockArticle.value;
+ stockBody.innerHTML=PARTS.map(p=>`<tr><td>${p}</td><td>${fmt(total(a,p,"in"))}</td><td>${fmt(total(a,p,"out"))}</td><td><b>${fmt(stock(a,p))}</b></td></tr>`).join("");
+}
+function saveTarget(){
+ let m=targetMonth.value,a=targetArticle.value,p=targetPart.value,q=Number(targetQty.value);
+ if(!m||!Number.isFinite(q)||q<0){alert("সঠিক মাস ও টার্গেট দিন");return}
+ db.targets[targetKey(m,a,p)]=q;
+ save();targetQty.value="";renderAll();alert("টার্গেট সংরক্ষিত হয়েছে");
+}
+function renderTargetTable(){
+ if(!targetViewArticle.value)return;
+ let m=targetViewMonth.value||monthNow(),a=targetViewArticle.value;
+ let html="<div class='table-wrap'><table><thead><tr><th>পার্ট</th><th>টার্গেট</th><th>মাসিক ইনপুট</th><th>বাকি</th><th>অগ্রগতি</th></tr></thead><tbody>";
+ PARTS.forEach(p=>{
+  let t=getTarget(m,a,p),i=total(a,p,"in",m),pct=t?Math.min(100,i/t*100):0;
+  html+=`<tr><td>${p}</td><td>${fmt(t)}</td><td>${fmt(i)}</td><td>${fmt(t-i)}</td><td>${pct.toFixed(1)}%</td></tr>`;
+ });
+ html+="</tbody></table></div>";
+ targetTable.innerHTML=html;
+}
+function renderSets(){
+ let a=setArticle.value;if(!a)return;
+ let vals=PARTS.map(p=>({p,s:stock(a,p),i:total(a,p,"in"),o:total(a,p,"out")}));
+ let min=Math.min(...vals.map(v=>v.s));
+ setResult.innerHTML=`
+ <div class="stat green" style="margin-bottom:15px">
+ <small>বর্তমান স্টক অনুযায়ী সর্বোচ্চ সম্ভাব্য সেট</small>
+ <h2>${fmt(Math.max(0,min))} সেট</h2></div>
+ <div class="table-wrap"><table><thead><tr><th>পার্ট</th><th>মোট ইনপুট</th><th>মোট আউটপুট</th><th>বর্তমান স্টক</th><th>সেট অবস্থা</th></tr></thead><tbody>
+ ${vals.map(v=>`<tr><td>${v.p}</td><td>${fmt(v.i)}</td><td>${fmt(v.o)}</td><td>${fmt(v.s)}</td><td>${v.s===min?'<span class="badge b-low">সর্বনিম্ন সেট</span>':"পর্যাপ্ত"}</td></tr>`).join("")}
+ </tbody></table></div>`;
+}
+function renderHistory(){
+ if(!histArticle.value)return;
+ let type=histType.value,a=histArticle.value,m=histMonth.value;
+ let list=db.entries.filter(e=>(type==="all"||e.type===type)&&e.article===a&&(!m||e.date.slice(0,7)===m)).sort((x,y)=>y.date.localeCompare(x.date));
+ historyBody.innerHTML=list.length?list.map(e=>`<tr>
+ <td>${e.date}</td><td><span class="badge ${e.type==="in"?"b-in":"b-out"}">${e.type==="in"?"ইনপুট":"আউটপুট"}</span></td>
+ <td>${e.article}</td><td>${e.part}</td><td>${fmt(e.qty)}</td><td>${esc(e.detail)} ${esc(e.note)}</td>
+ <td><button class="btn btn-light" onclick="editEntry('${e.id}')">এডিট</button> <button class="btn btn-red" onclick="deleteEntry('${e.id}')">ডিলিট</button></td>
+ </tr>`).join(""):`<tr><td colspan="7" class="empty">কোনো হিসাব পাওয়া যায়নি</td></tr>`;
+}
+function editEntry(id){
+ let e=db.entries.find(x=>x.id===id);if(!e)return;
+ let q=prompt("নতুন পরিমাণ লিখুন",e.qty);if(q===null)return;
+ q=Number(q);if(!Number.isFinite(q)||q<=0){alert("সঠিক পরিমাণ দিন");return}
+ if(e.type==="out"&&q>stock(e.article,e.part)+e.qty){alert("এই পরিমাণ আউটপুট দিলে স্টক ঋণাত্মক হবে");return}
+ let d=prompt("বিবরণ / সোর্স / প্রাপক",e.detail||"");if(d===null)return;
+ let n=prompt("নোট",e.note||"");if(n===null)return;
+ e.qty=q;e.detail=d;e.note=n;save();renderAll();
+}
+function deleteEntry(id){
+ if(!confirm("এই হিসাবটি মুছে ফেলবেন?"))return;
+ db.entries=db.entries.filter(e=>e.id!==id);save();renderAll();
+}
+function renderReport(){
+ let m=reportMonth.value,a=reportArticle.value;
+ let ins=0,outs=0,targets=0;
+ PARTS.forEach(p=>{ins+=total(a,p,"in",m);outs+=total(a,p,"out",m);targets+=getTarget(m,a,p)});
+ let html=`<div class="stats">
+ <div class="stat blue"><small>মাসিক টার্গেট</small><h2>${fmt(targets)}</h2></div>
+ <div class="stat green"><small>মোট ইনপুট</small><h2>${fmt(ins)}</h2></div>
+ <div class="stat red"><small>মোট আউটপুট</small><h2>${fmt(outs)}</h2></div>
+ <div class="stat orange"><small>বর্তমান স্টক</small><h2>${fmt(PARTS.reduce((s,p)=>s+stock(a,p),0))}</h2></div>
+ </div>`;
+ html+="<div class='table-wrap'><table><thead><tr><th>পার্ট</th><th>টার্গেট</th><th>ইনপুট</th><th>আউটপুট</th><th>স্টক</th><th>বাকি টার্গেট</th></tr></thead><tbody>";
+ PARTS.forEach(p=>html+=`<tr><td>${p}</td><td>${fmt(getTarget(m,a,p))}</td><td>${fmt(total(a,p,"in",m))}</td><td>${fmt(total(a,p,"out",m))}</td><td>${fmt(stock(a,p))}</td><td>${fmt(getTarget(m,a,p)-total(a,p,"in",m))}</td></tr>`);
+ reportResult.innerHTML=html+"</tbody></table></div>";
+}
+function backupJSON(){
+ let blob=new Blob([JSON.stringify(db,null,2)],{type:"application/json"});
+ download(blob,"bag-erp-backup-"+today()+".json");
+}
+function exportCSV(){
+ let rows=[["Date","Type","Article","Part","Quantity","Details","Note"],...db.entries.map(e=>[e.date,e.type,e.article,e.part,e.qty,e.detail,e.note])];
+ let csv="\uFEFF"+rows.map(r=>r.map(v=>'"'+String(v??"").replace(/"/g,'""')+'"').join(",")).join("\n");
+ download(new Blob([csv],{type:"text/csv;charset=utf-8"}),"bag-erp-report.csv");
+}
+function download(blob,name){
+ let u=URL.createObjectURL(blob),a=document.createElement("a");
+ a.href=u;a.download=name;a.click();URL.revokeObjectURL(u);
+}
+function restoreJSON(ev){
+ let f=ev.target.files[0];if(!f)return;
+ let r=new FileReader();
+ r.onload=()=>{
+  try{
+   let x=JSON.parse(r.result);
+   if(!Array.isArray(x.entries)||!x.targets)throw Error();
+   if(!confirm("বর্তমান ডাটার পরিবর্তে ব্যাকআপ বসবে। নিশ্চিত?"))return;
+   db=x;save();setup();alert("ব্যাকআপ ফিরিয়ে আনা হয়েছে");
+  }catch(e){alert("ভুল ব্যাকআপ ফাইল")}
+  ev.target.value="";
+ };
+ r.readAsText(f);
+}
+function resetAll(){
+ if(!confirm("সতর্কতা: সব ইনপুট, আউটপুট ও টার্গেট স্থায়ীভাবে মুছে যাবে। নিশ্চিত?"))return;
+ if(!confirm("শেষবার নিশ্চিত করুন। আগে ব্যাকআপ নিয়েছেন?"))return;
+ db={entries:[],targets:{},theme:db.theme};save();renderAll();
+}
+setup();
 </script>
-
 </body>
 </html>
